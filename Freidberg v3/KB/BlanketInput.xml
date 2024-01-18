@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataSchema>
+    <reactor>
+        <geometry>
+            <b></b>
+        </geometry>
+        <plasma>
+            <En></En>
+        </plasma>
+        <blanket>
+            <lambdabr></lambdabr>
+            <lambdasd></lambdasd>
+            <Et></Et>
+            <gamman0></gamman0>
+        </blanket>
+    </reactor>
+</dataSchema>

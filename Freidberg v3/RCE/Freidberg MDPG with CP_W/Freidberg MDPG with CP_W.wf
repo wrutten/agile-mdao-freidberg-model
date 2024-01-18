@@ -1,0 +1,1390 @@
+{
+  "identifier" : "55a93f43-11d7-4935-90d4-c69320889f8c",
+  "workflowVersion" : "5",
+  "name" : "unconverged-OPTNone.wf",
+  "nodes" : [ {
+    "identifier" : "39585b8b-42f9-45ab-9004-79281b5e558d",
+    "name" : "Blanket",
+    "location" : "1314:1314",
+    "zIndex" : "15",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.integration.cpacs.Blanket",
+      "version" : "1.0",
+      "name" : "Blanket"
+    },
+    "configuration" : {
+      "storeComponentHistoryData" : "true"
+    },
+    "staticInputs" : [ {
+      "identifier" : "961cc939-ac6f-4546-8e9b-bfaf9028ee00",
+      "name" : "CPACS in",
+      "datatype" : "FileReference",
+      "metadata" : {
+        "endpointFileName" : ""
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "8cbbf9da-a9af-4874-8e5c-76c32c586f02",
+      "name" : "CPACS out",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "53e6cebe-c459-4e37-ae55-4140b229e5f1",
+    "name" : "CPW",
+    "location" : "1705:1705",
+    "zIndex" : "12",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.script",
+      "version" : "3.4",
+      "name" : "Script"
+    },
+    "configuration" : {
+      "pythonExecutionPath" : "${pythonExecutionPath}",
+      "script" : "from math import *\nPW = RCE.read_input('/dataSchema/reactor/plasma/PW')\nCPW = PW\nRCE.write_output('/dataSchema/reactor/plasma/CPW', CPW)",
+      "scriptLanguage" : "Jython",
+      "storeComponentHistoryData" : "true",
+      "usageOfScript" : "NEW"
+    },
+    "dynamicInputs" : [ {
+      "identifier" : "cb7aafe3-d179-4468-96b4-fd8669c7f083",
+      "name" : "/dataSchema/reactor/plasma/PW",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "6e8deb73-4cfd-4dfd-bcda-7ddcc79d8f85",
+      "name" : "/dataSchema/reactor/plasma/CPW",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    } ]
+  }, {
+    "identifier" : "bdc10d2c-4024-4942-87cf-e104cc2dd00b",
+    "name" : "CPcoil",
+    "location" : "1489:1489",
+    "zIndex" : "16",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.script",
+      "version" : "3.4",
+      "name" : "Script"
+    },
+    "configuration" : {
+      "pythonExecutionPath" : "${pythonExecutionPath}",
+      "script" : "from math import *\nEt = RCE.read_input('/dataSchema/reactor/blanket/Et')\ngamman = RCE.read_input('/dataSchema/reactor/blanket/gamman')\nc = RCE.read_input('/dataSchema/reactor/geometry/c')\n\nPcoil = gamman*Et*1.6022e-13/c\nRCE.write_output('/dataSchema/reactor/coils/Pcoil',Pcoil)\nprint('Pcoil = ', Pcoil)",
+      "scriptLanguage" : "Jython",
+      "storeComponentHistoryData" : "true",
+      "usageOfScript" : "NEW"
+    },
+    "dynamicInputs" : [ {
+      "identifier" : "27110609-6069-4994-ad35-ded14ff56353",
+      "name" : "/dataSchema/reactor/blanket/Et",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    }, {
+      "identifier" : "be4aef73-d74c-4155-a192-d6364af219e7",
+      "name" : "/dataSchema/reactor/blanket/gamman",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    }, {
+      "identifier" : "2c6c2d4b-1f4f-49ee-be05-537bc5234e2a",
+      "name" : "/dataSchema/reactor/geometry/c",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "9804e483-1a64-4c54-8c35-953a5599dc49",
+      "name" : "/dataSchema/reactor/coils/Pcoil",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    } ]
+  }, {
+    "identifier" : "4bf95bdc-eb3a-4329-af45-236fa8951f09",
+    "name" : "Coils",
+    "location" : "828:828",
+    "zIndex" : "20",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.integration.cpacs.Coils",
+      "version" : "1.0",
+      "name" : "Coils"
+    },
+    "configuration" : {
+      "storeComponentHistoryData" : "true"
+    },
+    "staticInputs" : [ {
+      "identifier" : "7de7c119-337c-43a6-889c-0f2939eb836a",
+      "name" : "CPACS in",
+      "datatype" : "FileReference",
+      "metadata" : {
+        "endpointFileName" : ""
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "5cb9d274-134a-4d82-adb0-78e7f4abe6d1",
+      "name" : "CPACS out",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "6c7fe573-4637-40e9-a8cf-fb626e2d4459",
+    "name" : "Coordinator-in",
+    "location" : "114:114",
+    "zIndex" : "7",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.outputwriter",
+      "version" : "2.0",
+      "name" : "Output Writer"
+    },
+    "configuration" : {
+      "OWWritePath" : "${targetRootFolder}",
+      "SelectRootOnWorkflowStart" : "true",
+      "SelectedRoot" : "",
+      "outputLocations" : "{}",
+      "storeComponentHistoryData" : "true"
+    },
+    "dynamicInputs" : [ {
+      "identifier" : "ec3e2db4-f00e-4735-9827-bb1e7995f104",
+      "name" : "CPACS",
+      "epIdentifier" : "default",
+      "group" : "write",
+      "datatype" : "FileReference",
+      "metadata" : {
+        "filename" : "[Workflow name]_[Execution count]_[Timestamp].xml",
+        "folderForSaving" : "[root]\\"
+      }
+    } ]
+  }, {
+    "identifier" : "dfe84020-7ab8-4e2a-b606-c5d5f5187889",
+    "name" : "Coordinator-out",
+    "location" : "54:54",
+    "zIndex" : "14",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.inputprovider",
+      "version" : "3.2",
+      "name" : "Input Provider"
+    },
+    "configuration" : {
+      "storeComponentHistoryData" : "true"
+    },
+    "dynamicOutputs" : [ {
+      "identifier" : "913deb51-8f11-41cd-bc0c-6cc1d60217b2",
+      "name" : "Coordinator-out",
+      "epIdentifier" : "default",
+      "datatype" : "FileReference",
+      "metadata" : {
+        "startValue" : "/home/sandboxer/Desktop/Freidberg v3/Freidberg-base.xml"
+      }
+    } ]
+  }, {
+    "identifier" : "98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba",
+    "name" : "FirstWall",
+    "location" : "558:558",
+    "zIndex" : "4",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.integration.cpacs.FirstWall",
+      "version" : "1.0",
+      "name" : "FirstWall"
+    },
+    "configuration" : {
+      "storeComponentHistoryData" : "true"
+    },
+    "staticInputs" : [ {
+      "identifier" : "5d1915a6-afb0-4cb9-bb5e-74ce2e67728b",
+      "name" : "CPACS in",
+      "datatype" : "FileReference",
+      "metadata" : {
+        "endpointFileName" : ""
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "ff6a0eb5-cf2c-47ee-a9a4-227444a77ca9",
+      "name" : "CPACS out",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "da468a53-c0bd-4593-b571-b8b1b9e61836",
+    "name" : "Gamma_n0",
+    "location" : "1003:1003",
+    "zIndex" : "13",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.script",
+      "version" : "3.4",
+      "name" : "Script"
+    },
+    "configuration" : {
+      "pythonExecutionPath" : "${pythonExecutionPath}",
+      "script" : "from math import *\nPW = RCE.read_input('/dataSchema/reactor/plasma/PW')\nEn = RCE.read_input('/dataSchema/reactor/plasma/En')\n\ngamman0 = PW/(En*1.6022e-13)\nRCE.write_output('/dataSchema/reactor/blanket/gamman0', gamman0)",
+      "scriptLanguage" : "Jython",
+      "storeComponentHistoryData" : "true",
+      "usageOfScript" : "NEW"
+    },
+    "dynamicInputs" : [ {
+      "identifier" : "c4094cec-a15c-48a9-82b0-bbd83f562715",
+      "name" : "/dataSchema/reactor/plasma/En",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    }, {
+      "identifier" : "0e113a1b-4a35-49e6-b62b-7519514e90e8",
+      "name" : "/dataSchema/reactor/plasma/PW",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "5fcd147e-d367-400f-827e-f1035d25b6a6",
+      "name" : "/dataSchema/reactor/blanket/gamman0",
+      "epIdentifier" : "default",
+      "datatype" : "Float"
+    } ]
+  }, {
+    "identifier" : "b510908e-e953-41a6-8878-c8e10650ba04",
+    "name" : "Merger_CPW_Input",
+    "location" : "1725:1645",
+    "zIndex" : "17",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "88f678b2-972d-488c-b41f-c77ec835bfb6",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "c1c57e11-fbc7-4116-a6ba-fb045de9f4c3",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "a1ad6cc4-3181-4af0-8aee-339fce1b5072",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "9ed53692-d7af-4e8d-a710-38a3548d106f",
+      "name" : "/dataSchema/reactor/plasma/PW",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/plasma/PW"
+      }
+    } ]
+  }, {
+    "identifier" : "5b1ae322-29b7-4015-9118-67512bbe19e2",
+    "name" : "Merger_CPW_Output",
+    "location" : "1725:1806",
+    "zIndex" : "1",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "12011944-4e0e-48bf-bd2c-9d894371c8dd",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "d2731766-1a8a-4986-a38b-8b0244932447",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicInputs" : [ {
+      "identifier" : "f4deaec3-7eb6-4820-97cb-5711f4166782",
+      "name" : "/dataSchema/reactor/plasma/CPW",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "inputExecutionConstraint_4aae3eea" : "Required",
+        "inputHandling_73b1056e" : "Queue",
+        "variable.xpath" : "/dataSchema/reactor/plasma/CPW"
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "dceac404-3853-4f88-a049-f304b2fe6c34",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "name" : "Merger_CPcoil_Input",
+    "location" : "1509:1429",
+    "zIndex" : "5",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "16e73d16-1da5-491e-a608-f24f2a98618b",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "f4e6cd71-e4d2-465b-bb81-46bf95decff9",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "f8c6a915-4569-4622-b65b-964d628ecb92",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "5009f311-69bd-47af-bf29-81fd46d49dc3",
+      "name" : "/dataSchema/reactor/blanket/Et",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/blanket/Et"
+      }
+    }, {
+      "identifier" : "d598f5a2-e496-4a90-ab05-b5868c3fc59b",
+      "name" : "/dataSchema/reactor/blanket/gamman",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/blanket/gamman"
+      }
+    }, {
+      "identifier" : "5d69c23d-c278-4f0b-bff4-44ca2bbab0ec",
+      "name" : "/dataSchema/reactor/geometry/c",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/c"
+      }
+    } ]
+  }, {
+    "identifier" : "dab810ff-39b0-4724-af2d-c0c72324d84c",
+    "name" : "Merger_CPcoil_Output",
+    "location" : "1509:1590",
+    "zIndex" : "9",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "1f87cb15-dcdf-42b3-adb0-8d15dfd720d1",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "3a54f600-5e01-41ec-bd4f-a94da9e1adf9",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicInputs" : [ {
+      "identifier" : "beef49c1-3984-4b6e-a6d1-6d7ca9c54f52",
+      "name" : "/dataSchema/reactor/coils/Pcoil",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "inputExecutionConstraint_4aae3eea" : "Required",
+        "inputHandling_73b1056e" : "Queue",
+        "variable.xpath" : "/dataSchema/reactor/coils/Pcoil"
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "14e7beb4-d064-4563-ba1a-2fffe718c55d",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "6d4be90c-1cc8-47a4-a935-a7c3966f68b7",
+    "name" : "Merger_Gamma_n0_Input",
+    "location" : "1023:943",
+    "zIndex" : "21",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "8dbcbe86-6cfc-46cd-9135-220aaf871e69",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "518d4635-6e3c-49d9-b50f-b3097003f9bf",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "40bc2280-eb10-46f3-8f66-f886d0af4fa8",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "5a562752-9735-4e07-a326-8c86d9866a91",
+      "name" : "/dataSchema/reactor/plasma/En",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/plasma/En"
+      }
+    }, {
+      "identifier" : "beed694c-6e0e-4e3e-bc86-cb8983720b29",
+      "name" : "/dataSchema/reactor/plasma/PW",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/plasma/PW"
+      }
+    } ]
+  }, {
+    "identifier" : "bba6de97-4d7b-43a9-9cc8-efd5d60be3ea",
+    "name" : "Merger_Gamma_n0_Output",
+    "location" : "1023:1104",
+    "zIndex" : "18",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "83e2f17a-8b1c-4046-be52-19769cbe0085",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "ea8bd92f-3fe8-4ee2-8f85-f53f843a81bd",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicInputs" : [ {
+      "identifier" : "8d814f9b-8aa8-4b21-81c7-f32d43674de8",
+      "name" : "/dataSchema/reactor/blanket/gamman0",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "inputExecutionConstraint_4aae3eea" : "Required",
+        "inputHandling_73b1056e" : "Queue",
+        "variable.xpath" : "/dataSchema/reactor/blanket/gamman0"
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "5550c107-57b8-47ec-b356-90fbd3146c5f",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "4fad8e1e-244f-43d9-b53b-3740ea1bf32b",
+    "name" : "Merger_Optimizer_CPW",
+    "location" : "261:464",
+    "zIndex" : "6",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "Classic",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<map:mappings xmlns:map=\"http://www.rcenvironment.de/2015/mapping\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/plasma/PW</map:source>\n\t\t<map:target>/dataSchema/reactor/plasma/PW</map:target>\n\t</map:mapping>\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/plasma/CPW</map:source>\n\t\t<map:target>/dataSchema/reactor/plasma/CPW</map:target>\n\t</map:mapping>\n</map:mappings>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "1513eb86-da65-4434-9c75-675ee29ca4c4",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "1f4476ee-dd78-4d36-a3ca-e6fdf71e7abb",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "ebe141cf-83d0-42ff-b861-fee47a91e880",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "3e5bab81-8031-4bc2-85e5-6a0261d51873",
+    "name" : "Merger_Optimizer_CPcoil",
+    "location" : "321:464",
+    "zIndex" : "0",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "Classic",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<map:mappings xmlns:map=\"http://www.rcenvironment.de/2015/mapping\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/coils/Pcoil</map:source>\n\t\t<map:target>/dataSchema/reactor/coils/Pcoil</map:target>\n\t</map:mapping>\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/blanket/gamman</map:source>\n\t\t<map:target>/dataSchema/reactor/blanket/gamman</map:target>\n\t</map:mapping>\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/plasma/PW</map:source>\n\t\t<map:target>/dataSchema/reactor/plasma/PW</map:target>\n\t</map:mapping>\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/plasma/gamman0</map:source>\n\t\t<map:target>/dataSchema/reactor/plasma/gamman0</map:target>\n\t</map:mapping>\n</map:mappings>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "f2285208-48b2-4e0a-ac25-c5e01b2c0455",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "0f0def58-42a3-461c-b41d-2e85b618572a",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "38da2ab2-75d0-4782-984f-b66a7ce8e333",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "name" : "Merger_Optimizer_Outer_Input",
+    "location" : "322:242",
+    "zIndex" : "10",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "Classic",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<map:mappings xmlns:map=\"http://www.rcenvironment.de/2015/mapping\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n</map:mappings>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "cf4c1652-0d14-4914-893c-c50b938e0c1a",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "d7e13ea7-a0c2-439b-ba75-ab415e5ff893",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "d447172f-659e-41c7-8adc-32edb19323c3",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "ea3cea96-d7fe-4893-b118-34e4f51591ee",
+      "name" : "/dataSchema/architectureNodes/initialGuessDesignVariables/dataSchemaCopy/reactor/geometry/R0",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/R0"
+      }
+    }, {
+      "identifier" : "1699c596-6618-4043-89f5-276872556064",
+      "name" : "/dataSchema/architectureNodes/initialGuessDesignVariables/dataSchemaCopy/reactor/geometry/a",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/a"
+      }
+    }, {
+      "identifier" : "4a71e3b6-e231-4162-967f-a0861d57fa38",
+      "name" : "/dataSchema/architectureNodes/initialGuessDesignVariables/dataSchemaCopy/reactor/geometry/b",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/b"
+      }
+    }, {
+      "identifier" : "1798ef36-8748-4908-b2dd-3edb21f04de1",
+      "name" : "/dataSchema/architectureNodes/initialGuessDesignVariables/dataSchemaCopy/reactor/geometry/c",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/c"
+      }
+    } ]
+  }, {
+    "identifier" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "name" : "Merger_Optimizer_Self_Input",
+    "location" : "322:403",
+    "zIndex" : "3",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "191880df-1f10-4d4e-9c11-1c359c19ed53",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "4169adc8-1a0b-4c35-af3c-f620783d2eff",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "19e5cd2a-01ca-43f4-ad56-3a24fc830f76",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "86276717-3ddd-47af-991e-1155d15118bb",
+      "name" : "/dataSchema/reactor/coils/Pcoil",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/coils/Pcoil"
+      }
+    }, {
+      "identifier" : "2363fba2-df77-4199-9dd7-6fcdebc13d96",
+      "name" : "/dataSchema/reactor/coils/sigma",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/coils/sigma"
+      }
+    }, {
+      "identifier" : "7d7a9dba-6e79-47ed-ab08-3f76d921e881",
+      "name" : "/dataSchema/reactor/other/VIPE",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/other/VIPE"
+      }
+    }, {
+      "identifier" : "97061bc8-5ca9-45b6-a5d3-c04976e278c0",
+      "name" : "/dataSchema/reactor/plasma/CPW",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/plasma/CPW"
+      }
+    } ]
+  }, {
+    "identifier" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "name" : "Merger_Optimizer_Self_Output",
+    "location" : "403:322",
+    "zIndex" : "11",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "XSLT",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xsl:stylesheet version=\"1.0\"\n    xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"\n        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" exclude-result-prefixes=\"xsi\">\n    <xsl:output method=\"xml\" version=\"1.0\" encoding=\"UTF-8\" indent=\"yes\"/>\n    <xsl:template match=\"@* | node()\">\n        <xsl:copy>\n            <xsl:apply-templates select=\"@* | node()\"/>\n        </xsl:copy>\n    </xsl:template>\n</xsl:stylesheet>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "b35ca238-cb00-48a6-9023-500cedb985c3",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "d8362d2f-80d4-446f-9986-779db8cced8c",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "dynamicInputs" : [ {
+      "identifier" : "7bbf2837-d13e-4e1a-92b8-887e935788f1",
+      "name" : "/dataSchema/reactor/geometry/R0",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/R0"
+      }
+    }, {
+      "identifier" : "1546d26e-9eda-469f-ab43-772426f37b3f",
+      "name" : "/dataSchema/reactor/geometry/a",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/a"
+      }
+    }, {
+      "identifier" : "e80f27a5-e146-4e53-a23b-6259e320e806",
+      "name" : "/dataSchema/reactor/geometry/b",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/b"
+      }
+    }, {
+      "identifier" : "44332e8e-07af-4ec5-bd56-db76239e0c83",
+      "name" : "/dataSchema/reactor/geometry/c",
+      "epIdentifier" : "default",
+      "datatype" : "Float",
+      "metadata" : {
+        "variable.xpath" : "/dataSchema/reactor/geometry/c"
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "da352c8e-5fb0-46ec-ba55-e54d3a6304aa",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "cdd4bb36-c756-483e-b163-c1420037a723",
+    "name" : "Merger_Optimizer_VolumeOverPower",
+    "location" : "382:464",
+    "zIndex" : "22",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.xmlmerger",
+      "version" : "4.0",
+      "name" : "XML Merger"
+    },
+    "configuration" : {
+      "mappingFileDeployment" : "loaded",
+      "mappingType" : "Classic",
+      "storeComponentHistoryData" : "true",
+      "xmlContent" : "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<map:mappings xmlns:map=\"http://www.rcenvironment.de/2015/mapping\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/other/VIPE</map:source>\n\t\t<map:target>/dataSchema/reactor/other/VIPE</map:target>\n\t</map:mapping>\n\t<map:mapping mode=\"delete\">\n\t\t<map:source>/dataSchema/reactor/other/PE</map:source>\n\t\t<map:target>/dataSchema/reactor/other/PE</map:target>\n\t</map:mapping>\n</map:mappings>\n"
+    },
+    "staticInputs" : [ {
+      "identifier" : "cdca787e-d406-401d-a38c-0b960d52d5bd",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "31eccfab-adbb-417e-b4b1-6cd88ac6c8ab",
+      "name" : "XML to integrate",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "bfe111b5-85a6-45eb-9b14-314b54e30c0e",
+      "name" : "XML",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "name" : "Optimizer",
+    "location" : "302:302",
+    "zIndex" : "2",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.optimizer",
+      "version" : "8",
+      "name" : "Optimizer"
+    },
+    "configuration" : {
+      "CustomDakotaPath" : "false",
+      "algorithm" : "Dakota Coliny COBYLA (Constraint Optimization By Linear Approximations)",
+      "dakotaExecPath" : "${dakotaExecPath}",
+      "failLoopOnly-NAV_5e0ed1cd" : "false",
+      "faultTolerance-NAV_5e0ed1cd" : "Fail",
+      "finallyFailIfDiscarded-NAV_5e0ed1cd" : "false",
+      "loopFaultTolerance_5e0ed1cd" : "Fail",
+      "maxRerunBeforeDiscard-NAV_5e0ed1cd" : "1",
+      "maxRerunBeforeFail-NAV_5e0ed1cd" : "1",
+      "methodConfigurations" : "{\n  \"Dakota HOPSPACK Asynch Pattern Search\" : {\n    \"methodName\" : \"Dakota HOPSPACK Asynch Pattern Search\",\n    \"methodCode\" : \"asynch_pattern_search\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"initial_delta\" : {\n        \"GuiName\" : \"Initial offset value\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"threshold_delta\" : {\n        \"GuiName\" : \"Threshold for offset values\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.01\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"contraction_factor\" : {\n        \"GuiName\" : \"Pattern contraction factor\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.5\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"solution_target\" : {\n        \"GuiName\" : \"Solution target\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"\",\n        \"Value\" : \"\",\n        \"Validation\" : \"optional\"\n      },\n      \"synchronization\" : {\n        \"GuiName\" : \"Evaluation synchronization\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"blocking,nonblocking\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"nonblocking\",\n        \"Validation\" : \"\"\n      },\n      \"merit_function\" : {\n        \"GuiName\" : \"Merit function\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"merit_max,merit_max_smooth,merit1,merit1_smooth,merit2,merit2_smooth,merit2_squared\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"merit2_squared\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_penalty\" : {\n        \"GuiName\" : \"Constraint penalty\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"1\",\n        \"Validation\" : \"\"\n      },\n      \"smoothing_factor\" : {\n        \"GuiName\" : \"Smoothing factor\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"0\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"responsesSettings\" : null,\n    \"configMap\" : null\n  },\n  \"Dakota Multi Objective Genetic Algorithm\" : {\n    \"methodName\" : \"Dakota Multi Objective Genetic Algorithm\",\n    \"methodCode\" : \"moga\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"fitness_type\" : {\n        \"GuiName\" : \"Fitness type\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"layer_rank,domination_count\",\n        \"DefaultValue\" : \"domination_count\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"seed\" : {\n        \"GuiName\" : \"Random seed\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"population_size\" : {\n        \"GuiName\" : \"Number of population members\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"50\",\n        \"Value\" : \"\",\n        \"Validation\" : \">=0\"\n      },\n      \"initialization_type\" : {\n        \"GuiName\" : \"Initialization type\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"simple_random,unique_random\",\n        \"DefaultValue\" : \"unique_random\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_type\" : {\n        \"GuiName\" : \"Mutation type\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"replace_uniform,bit_random,offset_normal,offset_cauchy,offset_uniform\",\n        \"DefaultValue\" : \"replace_uniform\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_rate\" : {\n        \"GuiName\" : \"Mutation rate\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.08\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"replacement_type\" : {\n        \"GuiName\" : \"Replacement type\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"roulette_wheel,unique_roulette_wheel,elitist\",\n        \"DefaultValue\" : \"elitist\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"crossover_type\" : {\n        \"GuiName\" : \"Crossover type\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"multi_point_binary,multi_point_parameterized_binary,multi_point_real\",\n        \"DefaultValue\" : \"multi_point_real\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"NoLinebreak\" : \"true\"\n      },\n      \"crossover_type_value\" : {\n        \"GuiName\" : \"Crossover type value\",\n        \"GuiOrder\" : \"9\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"50\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"NoKeyword\" : \"true\"\n      },\n      \"crossover_rate\" : {\n        \"GuiName\" : \"Crossover rate\",\n        \"GuiOrder\" : \"10\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"0.8\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"responsesSettings\" : null,\n    \"configMap\" : null\n  },\n  \"Dakota NOMAD (Mesh Adaptive Direct Search Algorithm)\" : {\n    \"methodName\" : \"Dakota NOMAD (Mesh Adaptive Direct Search Algorithm)\",\n    \"methodCode\" : \"mesh_adaptive_search\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"function_precision\" : {\n        \"GuiName\" : \"Maximum precision of responses\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-5\",\n        \"Value\" : \"\",\n        \"Validation\" : \">0\"\n      },\n      \"seed\" : {\n        \"GuiName\" : \"Seed\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \">0\"\n      },\n      \"variable_neighborhood_search\" : {\n        \"GuiName\" : \"Neighborhood search\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.5\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"responsesSettings\" : null,\n    \"configMap\" : null\n  },\n  \"Dakota Latin Hypercube Sampling\" : {\n    \"methodName\" : \"Dakota Latin Hypercube Sampling\",\n    \"methodCode\" : \"dace lhs\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"seed\" : {\n        \"GuiName\" : \"Seed\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"fixed_seed\" : {\n        \"GuiName\" : \"Fixed seed flag\",\n        \"dataType\" : \"bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"false\",\n        \"Validation\" : \"\"\n      },\n      \"samples\" : {\n        \"GuiName\" : \"Number of samples\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"10\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"symbols\" : {\n        \"GuiName\" : \"Number of symbols\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"main_effects\" : {\n        \"GuiName\" : \"Main effects\",\n        \"dataType\" : \"bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"quality_metrics\" : {\n        \"GuiName\" : \"Quality metrics\",\n        \"dataType\" : \"bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"variance_based_decomp\" : {\n        \"GuiName\" : \"Varianve based decomposition\",\n        \"dataType\" : \"bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"responsesSettings\" : null,\n    \"configMap\" : null\n  },\n  \"Dakota Coliny Evolutionary Algorithm\" : {\n    \"methodName\" : \"Dakota Coliny Evolutionary Algorithm\",\n    \"methodCode\" : \"coliny_ea\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"seed\" : {\n        \"GuiName\" : \"Random seed\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"\",\n        \"Value\" : \"\",\n        \"Validation\" : \">=0\"\n      },\n      \"population_size\" : {\n        \"GuiName\" : \"Number of population members\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"50\",\n        \"Value\" : \"\",\n        \"Validation\" : \">=0\"\n      },\n      \"initialization_type\" : {\n        \"GuiName\" : \"Initialization type\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"simple_random,unique_random\",\n        \"DefaultValue\" : \"unique_random\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"fitness_type\" : {\n        \"GuiName\" : \"Fitness type\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"linear_rank,merit_function\",\n        \"DefaultValue\" : \"linear_rank\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"replacement_type\" : {\n        \"GuiName\" : \"Replacement type\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"random,chc,elitist\",\n        \"DefaultValue\" : \"elitist\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"NoLinebreak\" : \"true\"\n      },\n      \"replacement_type_value\" : {\n        \"GuiName\" : \"Replacement size\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"NoKeyword\" : \"true\"\n      },\n      \"new_solutions_generated\" : {\n        \"GuiName\" : \"New solutions generated\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"50\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"crossover_type\" : {\n        \"GuiName\" : \"Crossover type\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"two_point,blend,uniform\",\n        \"DefaultValue\" : \"two_point\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"crossover_rate\" : {\n        \"GuiName\" : \"Crossover rate\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.8\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_type\" : {\n        \"GuiName\" : \"Mutation type\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"replace_uniform,offset_normal,offset_cauchy,offset_uniform\",\n        \"DefaultValue\" : \"offset_normal\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_scale\" : {\n        \"GuiName\" : \"Mutation scale\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_range\" : {\n        \"GuiName\" : \"Mutation range\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_rate\" : {\n        \"GuiName\" : \"Mutation rate\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.0\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"non_adaptive\" : {\n        \"GuiName\" : \"Non-adaptive mutation flag\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"solution_accuracy\" : {\n        \"GuiName\" : \"Solution accuracy\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"required\"\n      }\n    },\n    \"responsesSettings\" : null,\n    \"configMap\" : null\n  },\n  \"Dakota Surrogate-Based Local\" : {\n    \"methodName\" : \"Dakota Surrogate-Based Local\",\n    \"methodCode\" : \"surrogate_based_local\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"2\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"approx_method_pointer\" : {\n        \"doNotShow\" : \"true\",\n        \"dataType\" : \"String\",\n        \"DefaultValue\" : \"method2\",\n        \"Value\" : \"\"\n      },\n      \"dace_list\" : {\n        \"doNotShow\" : \"true\",\n        \"doNotWrite\" : \"true\",\n        \"dataType\" : \"String\",\n        \"DefaultValue\" : \"Dakota Latin Hypercube Sampling\",\n        \"Value\" : \"\"\n      },\n      \"approx_method_list\" : {\n        \"doNotShow\" : \"true\",\n        \"doNotWrite\" : \"true\",\n        \"dataType\" : \"String\",\n        \"DefaultValue\" : \"Dakota Coliny COBYLA (Constraint Optimization By Linear Approximations),Dakota Quasi-Newton method\",\n        \"Value\" : \"\"\n      }\n    },\n    \"responsesSettings\" : {\n      \"gradients\" : {\n        \"GuiName\" : \"Use gradients\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"no_gradients,numerical_gradients\",\n        \"DefaultValue\" : \"no_gradients\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"noKeyword\" : \"true\"\n      },\n      \"interval_type\" : {\n        \"GuiName\" : \"Gradient interval type\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"forward,central\",\n        \"DefaultValue\" : \"forward\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"fd_gradient_step_size\" : {\n        \"GuiName\" : \"Gradient stepsize\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.0E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \">0\"\n      },\n      \"hessians\" : {\n        \"GuiName\" : \"Use hessians\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"no_hessians\",\n        \"DefaultValue\" : \"no_hessians\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"noKeyword\" : \"true\"\n      }\n    },\n    \"configMap\" : null\n  },\n  \"Dakota Coliny COBYLA (Constraint Optimization By Linear Approximations)\" : {\n    \"methodName\" : \"Dakota Coliny COBYLA (Constraint Optimization By Linear Approximations)\",\n    \"methodCode\" : \"coliny_cobyla\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"initial_delta\" : {\n        \"GuiName\" : \"Initial trust region\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.0\",\n        \"Value\" : \"\",\n        \"Validation\" : \"required\"\n      },\n      \"threshold_delta\" : {\n        \"GuiName\" : \"Minimal trust region (stopping criterion)\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"required\"\n      },\n      \"solution_accuracy\" : {\n        \"GuiName\" : \"Solution accuracy\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"required\"\n      }\n    },\n    \"responsesSettings\" : null,\n    \"configMap\" : null\n  },\n  \"Dakota Single Objective Genetic Algorithm\" : {\n    \"methodName\" : \"Dakota Single Objective Genetic Algorithm\",\n    \"methodCode\" : \"soga\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"fitness_type\" : {\n        \"GuiName\" : \"Fitness type\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"merit_function\",\n        \"DefaultValue\" : \"merit_function\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"seed\" : {\n        \"GuiName\" : \"Random seed\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"population_size\" : {\n        \"GuiName\" : \"Number of population members\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"50\",\n        \"Value\" : \"\",\n        \"Validation\" : \">=0\"\n      },\n      \"initialization_type\" : {\n        \"GuiName\" : \"Initialization type\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"simple_random,unique_random\",\n        \"DefaultValue\" : \"unique_random\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_type\" : {\n        \"GuiName\" : \"Mutation type\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"bit_random,replace_uniform,bit_random,offset_normal,offset_cauchy,offset_uniform\",\n        \"DefaultValue\" : \"replace_uniform\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"mutation_rate\" : {\n        \"GuiName\" : \"Mutation rate\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.08\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"replacement_type\" : {\n        \"GuiName\" : \"Replacement type\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"favor_feasible,roulette_wheel,unique_roulette_wheel,elitist\",\n        \"DefaultValue\" : \"elitist\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"crossover_type\" : {\n        \"GuiName\" : \"Crossover type\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"multi_point_binary,multi_point_parameterized_binary,multi_point_real\",\n        \"DefaultValue\" : \"multi_point_real\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"NoLinebreak\" : \"true\"\n      },\n      \"crossover_type_value\" : {\n        \"GuiName\" : \"Crossover type value\",\n        \"GuiOrder\" : \"9\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"50\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"NoKeyword\" : \"true\"\n      },\n      \"crossover_rate\" : {\n        \"GuiName\" : \"Crossover rate\",\n        \"GuiOrder\" : \"10\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.8\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"responsesSettings\" : null,\n    \"configMap\" : null\n  },\n  \"Dakota Quasi-Newton method\" : {\n    \"methodName\" : \"Dakota Quasi-Newton method\",\n    \"methodCode\" : \"optpp_q_newton\",\n    \"optimizerPackage\" : \"dakota\",\n    \"followingMethods\" : \"0\",\n    \"commonSettings\" : {\n      \"speculative\" : {\n        \"GuiName\" : \"Speculative gradients and Hessians\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"output\" : {\n        \"GuiName\" : \"Output verbosity\",\n        \"GuiOrder\" : \"8\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"debug,quiet,normal,silent,verbose\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"normal\",\n        \"Validation\" : \"\"\n      },\n      \"max_iterations\" : {\n        \"GuiName\" : \"Maximum iterations\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"100\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"scaling\" : {\n        \"GuiName\" : \"Scaling flag\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Bool\",\n        \"SWTWidget\" : \"Check\",\n        \"DefaultValue\" : \"false\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"constraint_tolerance\" : {\n        \"GuiName\" : \"Constraint tolerance\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"convergence_tolerance\" : {\n        \"GuiName\" : \"Convergence tolerance\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"final_solutions\" : {\n        \"GuiName\" : \"Final solutions\",\n        \"GuiOrder\" : \"7\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"max_function_evaluations\" : {\n        \"GuiName\" : \"Maximum function evaluations\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"Int\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"specificSettings\" : {\n      \"search_method\" : {\n        \"GuiName\" : \"Search method\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"value_based_line_search,gradient_based_line_search,trust_region,tr_pds\",\n        \"DefaultValue\" : \"trust_region\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"IsGroup\" : \"true\"\n      },\n      \"max_step\" : {\n        \"GuiName\" : \"Maximum step size\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1000\",\n        \"Value\" : \"\",\n        \"Validation\" : \">=0\"\n      },\n      \"gradient_tolerance\" : {\n        \"GuiName\" : \"Gradient tolerance\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"merit_function\" : {\n        \"GuiName\" : \"Merit function\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"el_bakry,argaez_tapia,van_shanno\",\n        \"DefaultValue\" : \"argaez_tapia\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"steplength_to_boundary\" : {\n        \"GuiName\" : \"Steplengh to boundary\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"0.99995\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"centering_parameter\" : {\n        \"GuiName\" : \"Centering parameter\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"Value\" : \"\",\n        \"DefaultValue\" : \"0.1\",\n        \"Validation\" : \"\"\n      }\n    },\n    \"responsesSettings\" : {\n      \"gradients\" : {\n        \"GuiName\" : \"Use gradients\",\n        \"GuiOrder\" : \"1\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"numerical_gradients,analytic_gradients\",\n        \"DefaultValue\" : \"numerical_gradients\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"noKeyword\" : \"true\"\n      },\n      \"interval_type\" : {\n        \"GuiName\" : \"Gradient interval type\",\n        \"GuiOrder\" : \"2\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"forward,central\",\n        \"DefaultValue\" : \"forward\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\"\n      },\n      \"fd_gradient_step_size\" : {\n        \"GuiName\" : \"Gradient stepsize\",\n        \"GuiOrder\" : \"3\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.0E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \">0\"\n      },\n      \"hessians\" : {\n        \"GuiName\" : \"Use hessians\",\n        \"GuiOrder\" : \"4\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"no_hessians,numerical_hessians\",\n        \"DefaultValue\" : \"no_hessians\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"noKeyword\" : \"true\"\n      },\n      \"interval_type_hessian\" : {\n        \"GuiName\" : \"Hessian interval type\",\n        \"GuiOrder\" : \"5\",\n        \"dataType\" : \"None\",\n        \"SWTWidget\" : \"Combo\",\n        \"Choices\" : \"forward,central\",\n        \"DefaultValue\" : \"forward\",\n        \"Value\" : \"\",\n        \"Validation\" : \"\",\n        \"noKeyword\" : \"true\"\n      },\n      \"fd_hessian_step_size\" : {\n        \"GuiName\" : \"Hessian stepsize\",\n        \"GuiOrder\" : \"6\",\n        \"dataType\" : \"Real\",\n        \"SWTWidget\" : \"Text\",\n        \"DefaultValue\" : \"1.0E-4\",\n        \"Value\" : \"\",\n        \"Validation\" : \">0\"\n      }\n    },\n    \"configMap\" : null\n  }\n}",
+      "optimizerPackageCode" : "dakota",
+      "preCalcFilePath" : "${preCalcFilePath}",
+      "storeComponentHistoryData" : "true",
+      "usePrecalculation" : "false"
+    },
+    "dynamicInputs" : [ {
+      "identifier" : "af052cbc-ea0c-4c54-b3b2-80fa1b85367d",
+      "name" : "/dataSchema/reactor/coils/Pcoil",
+      "epIdentifier" : "Constraint",
+      "group" : "valuesToOptimize",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasGradient" : "false",
+        "hasSingleBounds" : "true",
+        "inputExecutionConstraint_4aae3eea" : "Required",
+        "inputHandling_73b1056e" : "Single",
+        "lower" : "0",
+        "upper" : "50",
+        "vectorSize" : "-"
+      }
+    }, {
+      "identifier" : "96246c8e-7950-4090-8b7b-dfbd80453553",
+      "name" : "/dataSchema/reactor/coils/sigma",
+      "epIdentifier" : "Constraint",
+      "group" : "valuesToOptimize",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasGradient" : "false",
+        "hasSingleBounds" : "true",
+        "inputExecutionConstraint_4aae3eea" : "Required",
+        "inputHandling_73b1056e" : "Single",
+        "lower" : "0",
+        "upper" : "300",
+        "vectorSize" : "-"
+      }
+    }, {
+      "identifier" : "4808770c-2bfe-4232-b26c-bb99ee800534",
+      "name" : "/dataSchema/reactor/geometry/R0 - start value",
+      "epIdentifier" : "startvalues",
+      "group" : "startValues",
+      "datatype" : "Float",
+      "metadata" : {
+        "inputExecutionConstraint_4aae3eea" : "Required"
+      }
+    }, {
+      "identifier" : "059ec0a8-6539-4a7d-883d-f0380be98a86",
+      "name" : "/dataSchema/reactor/geometry/a - start value",
+      "epIdentifier" : "startvalues",
+      "group" : "startValues",
+      "datatype" : "Float",
+      "metadata" : {
+        "inputExecutionConstraint_4aae3eea" : "Required"
+      }
+    }, {
+      "identifier" : "8f5f104a-f6d0-4223-bfc0-fe517bad5e94",
+      "name" : "/dataSchema/reactor/geometry/b - start value",
+      "epIdentifier" : "startvalues",
+      "group" : "startValues",
+      "datatype" : "Float",
+      "metadata" : {
+        "inputExecutionConstraint_4aae3eea" : "Required"
+      }
+    }, {
+      "identifier" : "a20a33d6-4b93-44d3-a785-a5270457f13b",
+      "name" : "/dataSchema/reactor/geometry/c - start value",
+      "epIdentifier" : "startvalues",
+      "group" : "startValues",
+      "datatype" : "Float",
+      "metadata" : {
+        "inputExecutionConstraint_4aae3eea" : "Required"
+      }
+    }, {
+      "identifier" : "040084ec-3eb8-4284-9853-de79df5abcab",
+      "name" : "/dataSchema/reactor/other/VIPE",
+      "epIdentifier" : "Objective",
+      "group" : "valuesToOptimize",
+      "datatype" : "Float",
+      "metadata" : {
+        "goal" : "Minimize",
+        "hasGradient" : "false",
+        "vectorSize" : "",
+        "weight" : "1"
+      }
+    }, {
+      "identifier" : "7ca5b306-63a7-4318-9ef4-134370eb5785",
+      "name" : "/dataSchema/reactor/plasma/CPW",
+      "epIdentifier" : "Constraint",
+      "group" : "valuesToOptimize",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasGradient" : "false",
+        "hasSingleBounds" : "true",
+        "inputExecutionConstraint_4aae3eea" : "Required",
+        "inputHandling_73b1056e" : "Single",
+        "lower" : "0",
+        "upper" : "4",
+        "vectorSize" : "-"
+      }
+    }, {
+      "identifier" : "808ac45b-d83b-454a-b0b1-1150055bd42d",
+      "name" : "CPACS",
+      "epIdentifier" : "toForward",
+      "group" : "valuesToOptimize",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "efa77712-6405-49cc-b6d9-f13bd621ca10",
+      "name" : "CPACS_start",
+      "epIdentifier" : "startToForward",
+      "group" : "startValues",
+      "datatype" : "FileReference"
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "e08a1165-2c76-4725-a2d0-724bbe561074",
+      "name" : "Done",
+      "datatype" : "Boolean"
+    }, {
+      "identifier" : "b416dec0-75c0-4856-9253-d6aeb25efc11",
+      "name" : "Gradient request",
+      "datatype" : "Boolean"
+    }, {
+      "identifier" : "9e228406-8ff0-4151-bc0c-fda6def2db92",
+      "name" : "Iteration",
+      "datatype" : "Integer"
+    } ],
+    "dynamicOutputs" : [ {
+      "identifier" : "bdf4cb79-7d22-4163-ba49-c4f3c90da4e2",
+      "name" : "/dataSchema/reactor/geometry/R0",
+      "epIdentifier" : "Design",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasSingleBounds" : "true",
+        "hasStartValue" : "false",
+        "isDiscrete" : "false",
+        "lower" : "2.0",
+        "startValue" : "-",
+        "step" : "1",
+        "upper" : "10.0",
+        "useStep" : "false",
+        "useUnifiedStep" : "true",
+        "vectorSize" : ""
+      }
+    }, {
+      "identifier" : "f317d8ab-c287-40ec-8c07-f2968d79fbce",
+      "name" : "/dataSchema/reactor/geometry/R0_optimal",
+      "epIdentifier" : "optima",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasStartValue" : "false",
+        "lower" : "2.0",
+        "startValue" : "-",
+        "upper" : "10.0"
+      }
+    }, {
+      "identifier" : "090c987a-a068-483a-8cf2-ab8c91092542",
+      "name" : "/dataSchema/reactor/geometry/a",
+      "epIdentifier" : "Design",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasSingleBounds" : "true",
+        "hasStartValue" : "false",
+        "isDiscrete" : "false",
+        "lower" : "1.0",
+        "startValue" : "-",
+        "step" : "1",
+        "upper" : "4.0",
+        "useStep" : "false",
+        "useUnifiedStep" : "true",
+        "vectorSize" : ""
+      }
+    }, {
+      "identifier" : "8e1345a5-cc97-4b30-8267-bc4077ef8b95",
+      "name" : "/dataSchema/reactor/geometry/a_optimal",
+      "epIdentifier" : "optima",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasStartValue" : "false",
+        "lower" : "1.0",
+        "startValue" : "-",
+        "upper" : "4.0"
+      }
+    }, {
+      "identifier" : "19fdf18d-d268-4bed-8707-3f194c2e1de3",
+      "name" : "/dataSchema/reactor/geometry/b",
+      "epIdentifier" : "Design",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasSingleBounds" : "true",
+        "hasStartValue" : "false",
+        "isDiscrete" : "false",
+        "lower" : "0.5",
+        "startValue" : "-",
+        "step" : "1",
+        "upper" : "2.0",
+        "useStep" : "false",
+        "useUnifiedStep" : "true",
+        "vectorSize" : ""
+      }
+    }, {
+      "identifier" : "1aa51125-c61b-4180-95dd-5a9e4785cabc",
+      "name" : "/dataSchema/reactor/geometry/b_optimal",
+      "epIdentifier" : "optima",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasStartValue" : "false",
+        "lower" : "0.5",
+        "startValue" : "-",
+        "upper" : "2.0"
+      }
+    }, {
+      "identifier" : "07d11d65-8caa-45ae-adaa-fe8ef038fb5b",
+      "name" : "/dataSchema/reactor/geometry/c",
+      "epIdentifier" : "Design",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasSingleBounds" : "true",
+        "hasStartValue" : "false",
+        "isDiscrete" : "false",
+        "lower" : "0.5",
+        "startValue" : "-",
+        "step" : "1",
+        "upper" : "2.0",
+        "useStep" : "false",
+        "useUnifiedStep" : "true",
+        "vectorSize" : ""
+      }
+    }, {
+      "identifier" : "797f18ac-7dc5-4860-8686-c2d322ec5d26",
+      "name" : "/dataSchema/reactor/geometry/c_optimal",
+      "epIdentifier" : "optima",
+      "datatype" : "Float",
+      "metadata" : {
+        "hasStartValue" : "false",
+        "lower" : "0.5",
+        "startValue" : "-",
+        "upper" : "2.0"
+      }
+    }, {
+      "identifier" : "05eae648-d2de-4ecd-9231-63ad1c21865c",
+      "name" : "CPACS",
+      "epIdentifier" : "toForward",
+      "datatype" : "FileReference"
+    }, {
+      "identifier" : "ec775c75-1e4f-4ea3-9351-6ecd3c470eb6",
+      "name" : "CPACS_optimal",
+      "epIdentifier" : "finalToForward",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "544d58b3-b450-4526-9b90-85c53c416704",
+    "name" : "Plasma",
+    "location" : "693:693",
+    "zIndex" : "8",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.integration.cpacs.Plasma",
+      "version" : "1.0",
+      "name" : "Plasma"
+    },
+    "configuration" : {
+      "storeComponentHistoryData" : "true"
+    },
+    "staticInputs" : [ {
+      "identifier" : "26c8ba24-6c0e-446f-8671-15572ed17003",
+      "name" : "CPACS in",
+      "datatype" : "FileReference",
+      "metadata" : {
+        "endpointFileName" : ""
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "bc227ad7-37f6-4a86-ba48-e499b29252c4",
+      "name" : "CPACS out",
+      "datatype" : "FileReference"
+    } ]
+  }, {
+    "identifier" : "e0289e70-da64-433f-908d-3de2730ad774",
+    "name" : "VolumeOverPower",
+    "location" : "1179:1179",
+    "zIndex" : "19",
+    "active" : "true",
+    "component" : {
+      "identifier" : "de.rcenvironment.integration.cpacs.VolumeOverPower",
+      "version" : "1.0",
+      "name" : "VolumeOverPower"
+    },
+    "configuration" : {
+      "storeComponentHistoryData" : "true"
+    },
+    "staticInputs" : [ {
+      "identifier" : "e923cb42-2d4f-4438-8486-ad67d34fe3f0",
+      "name" : "CPACS in",
+      "datatype" : "FileReference",
+      "metadata" : {
+        "endpointFileName" : ""
+      }
+    } ],
+    "staticOutputs" : [ {
+      "identifier" : "82eab6bb-5ac2-43ef-a315-10dd260ab239",
+      "name" : "CPACS out",
+      "datatype" : "FileReference"
+    } ]
+  } ],
+  "connections" : [ {
+    "source" : "39585b8b-42f9-45ab-9004-79281b5e558d",
+    "output" : "8cbbf9da-a9af-4874-8e5c-76c32c586f02",
+    "target" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "input" : "16e73d16-1da5-491e-a608-f24f2a98618b"
+  }, {
+    "source" : "39585b8b-42f9-45ab-9004-79281b5e558d",
+    "output" : "8cbbf9da-a9af-4874-8e5c-76c32c586f02",
+    "target" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "input" : "f4e6cd71-e4d2-465b-bb81-46bf95decff9"
+  }, {
+    "source" : "53e6cebe-c459-4e37-ae55-4140b229e5f1",
+    "output" : "6e8deb73-4cfd-4dfd-bcda-7ddcc79d8f85",
+    "target" : "5b1ae322-29b7-4015-9118-67512bbe19e2",
+    "input" : "f4deaec3-7eb6-4820-97cb-5711f4166782"
+  }, {
+    "source" : "bdc10d2c-4024-4942-87cf-e104cc2dd00b",
+    "output" : "9804e483-1a64-4c54-8c35-953a5599dc49",
+    "target" : "dab810ff-39b0-4724-af2d-c0c72324d84c",
+    "input" : "beef49c1-3984-4b6e-a6d1-6d7ca9c54f52"
+  }, {
+    "source" : "4bf95bdc-eb3a-4329-af45-236fa8951f09",
+    "output" : "5cb9d274-134a-4d82-adb0-78e7f4abe6d1",
+    "target" : "4fad8e1e-244f-43d9-b53b-3740ea1bf32b",
+    "input" : "1513eb86-da65-4434-9c75-675ee29ca4c4"
+  }, {
+    "source" : "dfe84020-7ab8-4e2a-b606-c5d5f5187889",
+    "output" : "913deb51-8f11-41cd-bc0c-6cc1d60217b2",
+    "target" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "input" : "cf4c1652-0d14-4914-893c-c50b938e0c1a"
+  }, {
+    "source" : "dfe84020-7ab8-4e2a-b606-c5d5f5187889",
+    "output" : "913deb51-8f11-41cd-bc0c-6cc1d60217b2",
+    "target" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "input" : "d7e13ea7-a0c2-439b-ba75-ab415e5ff893"
+  }, {
+    "source" : "98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba",
+    "output" : "ff6a0eb5-cf2c-47ee-a9a4-227444a77ca9",
+    "target" : "b510908e-e953-41a6-8878-c8e10650ba04",
+    "input" : "88f678b2-972d-488c-b41f-c77ec835bfb6"
+  }, {
+    "source" : "98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba",
+    "output" : "ff6a0eb5-cf2c-47ee-a9a4-227444a77ca9",
+    "target" : "b510908e-e953-41a6-8878-c8e10650ba04",
+    "input" : "c1c57e11-fbc7-4116-a6ba-fb045de9f4c3"
+  }, {
+    "source" : "98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba",
+    "output" : "ff6a0eb5-cf2c-47ee-a9a4-227444a77ca9",
+    "target" : "6d4be90c-1cc8-47a4-a935-a7c3966f68b7",
+    "input" : "8dbcbe86-6cfc-46cd-9135-220aaf871e69"
+  }, {
+    "source" : "98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba",
+    "output" : "ff6a0eb5-cf2c-47ee-a9a4-227444a77ca9",
+    "target" : "6d4be90c-1cc8-47a4-a935-a7c3966f68b7",
+    "input" : "518d4635-6e3c-49d9-b50f-b3097003f9bf"
+  }, {
+    "source" : "da468a53-c0bd-4593-b571-b8b1b9e61836",
+    "output" : "5fcd147e-d367-400f-827e-f1035d25b6a6",
+    "target" : "bba6de97-4d7b-43a9-9cc8-efd5d60be3ea",
+    "input" : "8d814f9b-8aa8-4b21-81c7-f32d43674de8"
+  }, {
+    "source" : "b510908e-e953-41a6-8878-c8e10650ba04",
+    "output" : "9ed53692-d7af-4e8d-a710-38a3548d106f",
+    "target" : "53e6cebe-c459-4e37-ae55-4140b229e5f1",
+    "input" : "cb7aafe3-d179-4468-96b4-fd8669c7f083"
+  }, {
+    "source" : "b510908e-e953-41a6-8878-c8e10650ba04",
+    "output" : "a1ad6cc4-3181-4af0-8aee-339fce1b5072",
+    "target" : "5b1ae322-29b7-4015-9118-67512bbe19e2",
+    "input" : "12011944-4e0e-48bf-bd2c-9d894371c8dd"
+  }, {
+    "source" : "b510908e-e953-41a6-8878-c8e10650ba04",
+    "output" : "a1ad6cc4-3181-4af0-8aee-339fce1b5072",
+    "target" : "5b1ae322-29b7-4015-9118-67512bbe19e2",
+    "input" : "d2731766-1a8a-4986-a38b-8b0244932447"
+  }, {
+    "source" : "5b1ae322-29b7-4015-9118-67512bbe19e2",
+    "output" : "dceac404-3853-4f88-a049-f304b2fe6c34",
+    "target" : "4fad8e1e-244f-43d9-b53b-3740ea1bf32b",
+    "input" : "1f4476ee-dd78-4d36-a3ca-e6fdf71e7abb"
+  }, {
+    "source" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "output" : "5009f311-69bd-47af-bf29-81fd46d49dc3",
+    "target" : "bdc10d2c-4024-4942-87cf-e104cc2dd00b",
+    "input" : "27110609-6069-4994-ad35-ded14ff56353"
+  }, {
+    "source" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "output" : "d598f5a2-e496-4a90-ab05-b5868c3fc59b",
+    "target" : "bdc10d2c-4024-4942-87cf-e104cc2dd00b",
+    "input" : "be4aef73-d74c-4155-a192-d6364af219e7"
+  }, {
+    "source" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "output" : "5d69c23d-c278-4f0b-bff4-44ca2bbab0ec",
+    "target" : "bdc10d2c-4024-4942-87cf-e104cc2dd00b",
+    "input" : "2c6c2d4b-1f4f-49ee-be05-537bc5234e2a"
+  }, {
+    "source" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "output" : "f8c6a915-4569-4622-b65b-964d628ecb92",
+    "target" : "dab810ff-39b0-4724-af2d-c0c72324d84c",
+    "input" : "1f87cb15-dcdf-42b3-adb0-8d15dfd720d1"
+  }, {
+    "source" : "752a248e-fcf2-4866-96b2-6c1a2c5bd513",
+    "output" : "f8c6a915-4569-4622-b65b-964d628ecb92",
+    "target" : "dab810ff-39b0-4724-af2d-c0c72324d84c",
+    "input" : "3a54f600-5e01-41ec-bd4f-a94da9e1adf9"
+  }, {
+    "source" : "dab810ff-39b0-4724-af2d-c0c72324d84c",
+    "output" : "14e7beb4-d064-4563-ba1a-2fffe718c55d",
+    "target" : "3e5bab81-8031-4bc2-85e5-6a0261d51873",
+    "input" : "0f0def58-42a3-461c-b41d-2e85b618572a"
+  }, {
+    "source" : "6d4be90c-1cc8-47a4-a935-a7c3966f68b7",
+    "output" : "5a562752-9735-4e07-a326-8c86d9866a91",
+    "target" : "da468a53-c0bd-4593-b571-b8b1b9e61836",
+    "input" : "c4094cec-a15c-48a9-82b0-bbd83f562715"
+  }, {
+    "source" : "6d4be90c-1cc8-47a4-a935-a7c3966f68b7",
+    "output" : "beed694c-6e0e-4e3e-bc86-cb8983720b29",
+    "target" : "da468a53-c0bd-4593-b571-b8b1b9e61836",
+    "input" : "0e113a1b-4a35-49e6-b62b-7519514e90e8"
+  }, {
+    "source" : "6d4be90c-1cc8-47a4-a935-a7c3966f68b7",
+    "output" : "40bc2280-eb10-46f3-8f66-f886d0af4fa8",
+    "target" : "bba6de97-4d7b-43a9-9cc8-efd5d60be3ea",
+    "input" : "83e2f17a-8b1c-4046-be52-19769cbe0085"
+  }, {
+    "source" : "6d4be90c-1cc8-47a4-a935-a7c3966f68b7",
+    "output" : "40bc2280-eb10-46f3-8f66-f886d0af4fa8",
+    "target" : "bba6de97-4d7b-43a9-9cc8-efd5d60be3ea",
+    "input" : "ea8bd92f-3fe8-4ee2-8f85-f53f843a81bd"
+  }, {
+    "source" : "bba6de97-4d7b-43a9-9cc8-efd5d60be3ea",
+    "output" : "5550c107-57b8-47ec-b356-90fbd3146c5f",
+    "target" : "39585b8b-42f9-45ab-9004-79281b5e558d",
+    "input" : "961cc939-ac6f-4546-8e9b-bfaf9028ee00"
+  }, {
+    "source" : "4fad8e1e-244f-43d9-b53b-3740ea1bf32b",
+    "output" : "ebe141cf-83d0-42ff-b861-fee47a91e880",
+    "target" : "3e5bab81-8031-4bc2-85e5-6a0261d51873",
+    "input" : "f2285208-48b2-4e0a-ac25-c5e01b2c0455"
+  }, {
+    "source" : "3e5bab81-8031-4bc2-85e5-6a0261d51873",
+    "output" : "38da2ab2-75d0-4782-984f-b66a7ce8e333",
+    "target" : "cdd4bb36-c756-483e-b163-c1420037a723",
+    "input" : "cdca787e-d406-401d-a38c-0b960d52d5bd"
+  }, {
+    "source" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "output" : "ea3cea96-d7fe-4893-b118-34e4f51591ee",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "4808770c-2bfe-4232-b26c-bb99ee800534"
+  }, {
+    "source" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "output" : "1699c596-6618-4043-89f5-276872556064",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "059ec0a8-6539-4a7d-883d-f0380be98a86"
+  }, {
+    "source" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "output" : "4a71e3b6-e231-4162-967f-a0861d57fa38",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "8f5f104a-f6d0-4223-bfc0-fe517bad5e94"
+  }, {
+    "source" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "output" : "1798ef36-8748-4908-b2dd-3edb21f04de1",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "a20a33d6-4b93-44d3-a785-a5270457f13b"
+  }, {
+    "source" : "b2096149-4665-46ec-8146-1976fcb9fba9",
+    "output" : "d447172f-659e-41c7-8adc-32edb19323c3",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "efa77712-6405-49cc-b6d9-f13bd621ca10"
+  }, {
+    "source" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "output" : "86276717-3ddd-47af-991e-1155d15118bb",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "af052cbc-ea0c-4c54-b3b2-80fa1b85367d"
+  }, {
+    "source" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "output" : "2363fba2-df77-4199-9dd7-6fcdebc13d96",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "96246c8e-7950-4090-8b7b-dfbd80453553"
+  }, {
+    "source" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "output" : "7d7a9dba-6e79-47ed-ab08-3f76d921e881",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "040084ec-3eb8-4284-9853-de79df5abcab"
+  }, {
+    "source" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "output" : "97061bc8-5ca9-45b6-a5d3-c04976e278c0",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "7ca5b306-63a7-4318-9ef4-134370eb5785"
+  }, {
+    "source" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "output" : "19e5cd2a-01ca-43f4-ad56-3a24fc830f76",
+    "target" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "input" : "808ac45b-d83b-454a-b0b1-1150055bd42d"
+  }, {
+    "source" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "output" : "da352c8e-5fb0-46ec-ba55-e54d3a6304aa",
+    "target" : "4bf95bdc-eb3a-4329-af45-236fa8951f09",
+    "input" : "7de7c119-337c-43a6-889c-0f2939eb836a"
+  }, {
+    "source" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "output" : "da352c8e-5fb0-46ec-ba55-e54d3a6304aa",
+    "target" : "98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba",
+    "input" : "5d1915a6-afb0-4cb9-bb5e-74ce2e67728b"
+  }, {
+    "source" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "output" : "da352c8e-5fb0-46ec-ba55-e54d3a6304aa",
+    "target" : "544d58b3-b450-4526-9b90-85c53c416704",
+    "input" : "26c8ba24-6c0e-446f-8671-15572ed17003"
+  }, {
+    "source" : "cdd4bb36-c756-483e-b163-c1420037a723",
+    "output" : "bfe111b5-85a6-45eb-9b14-314b54e30c0e",
+    "target" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "input" : "191880df-1f10-4d4e-9c11-1c359c19ed53"
+  }, {
+    "source" : "cdd4bb36-c756-483e-b163-c1420037a723",
+    "output" : "bfe111b5-85a6-45eb-9b14-314b54e30c0e",
+    "target" : "7c0bfeb9-3bbd-4e60-8243-5ed95a9dae52",
+    "input" : "4169adc8-1a0b-4c35-af3c-f620783d2eff"
+  }, {
+    "source" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "output" : "bdf4cb79-7d22-4163-ba49-c4f3c90da4e2",
+    "target" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "input" : "7bbf2837-d13e-4e1a-92b8-887e935788f1"
+  }, {
+    "source" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "output" : "090c987a-a068-483a-8cf2-ab8c91092542",
+    "target" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "input" : "1546d26e-9eda-469f-ab43-772426f37b3f"
+  }, {
+    "source" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "output" : "19fdf18d-d268-4bed-8707-3f194c2e1de3",
+    "target" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "input" : "e80f27a5-e146-4e53-a23b-6259e320e806"
+  }, {
+    "source" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "output" : "07d11d65-8caa-45ae-adaa-fe8ef038fb5b",
+    "target" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "input" : "44332e8e-07af-4ec5-bd56-db76239e0c83"
+  }, {
+    "source" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "output" : "05eae648-d2de-4ecd-9231-63ad1c21865c",
+    "target" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "input" : "b35ca238-cb00-48a6-9023-500cedb985c3"
+  }, {
+    "source" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "output" : "05eae648-d2de-4ecd-9231-63ad1c21865c",
+    "target" : "a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6",
+    "input" : "d8362d2f-80d4-446f-9986-779db8cced8c"
+  }, {
+    "source" : "cb132fb6-6620-4778-8874-b6804a1a2667",
+    "output" : "ec775c75-1e4f-4ea3-9351-6ecd3c470eb6",
+    "target" : "6c7fe573-4637-40e9-a8cf-fb626e2d4459",
+    "input" : "ec3e2db4-f00e-4735-9827-bb1e7995f104"
+  }, {
+    "source" : "544d58b3-b450-4526-9b90-85c53c416704",
+    "output" : "bc227ad7-37f6-4a86-ba48-e499b29252c4",
+    "target" : "e0289e70-da64-433f-908d-3de2730ad774",
+    "input" : "e923cb42-2d4f-4438-8486-ad67d34fe3f0"
+  }, {
+    "source" : "e0289e70-da64-433f-908d-3de2730ad774",
+    "output" : "82eab6bb-5ac2-43ef-a315-10dd260ab239",
+    "target" : "cdd4bb36-c756-483e-b163-c1420037a723",
+    "input" : "31eccfab-adbb-417e-b4b1-6cd88ac6c8ab"
+  } ],
+  "bendpoints" : "[{\"source\":\"544d58b3-b450-4526-9b90-85c53c416704\",\"target\":\"e0289e70-da64-433f-908d-3de2730ad774\",\"coordinates\":\"1219:733\"},{\"source\":\"5b1ae322-29b7-4015-9118-67512bbe19e2\",\"target\":\"4fad8e1e-244f-43d9-b53b-3740ea1bf32b\",\"coordinates\":\"281:1826\"},{\"source\":\"cb132fb6-6620-4778-8874-b6804a1a2667\",\"target\":\"6c7fe573-4637-40e9-a8cf-fb626e2d4459\",\"coordinates\":\"134:342\"},{\"source\":\"98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba\",\"target\":\"b510908e-e953-41a6-8878-c8e10650ba04\",\"coordinates\":\"1745:598\"},{\"source\":\"4bf95bdc-eb3a-4329-af45-236fa8951f09\",\"target\":\"4fad8e1e-244f-43d9-b53b-3740ea1bf32b\",\"coordinates\":\"281:868\"},{\"source\":\"a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6\",\"target\":\"4bf95bdc-eb3a-4329-af45-236fa8951f09\",\"coordinates\":\"868:342\"},{\"source\":\"bba6de97-4d7b-43a9-9cc8-efd5d60be3ea\",\"target\":\"39585b8b-42f9-45ab-9004-79281b5e558d\",\"coordinates\":\"1354:1124\"},{\"source\":\"39585b8b-42f9-45ab-9004-79281b5e558d\",\"target\":\"752a248e-fcf2-4866-96b2-6c1a2c5bd513\",\"coordinates\":\"1529:1354\"},{\"source\":\"a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6\",\"target\":\"544d58b3-b450-4526-9b90-85c53c416704\",\"coordinates\":\"733:342\"},{\"source\":\"98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba\",\"target\":\"6d4be90c-1cc8-47a4-a935-a7c3966f68b7\",\"coordinates\":\"1043:598\"},{\"source\":\"e0289e70-da64-433f-908d-3de2730ad774\",\"target\":\"cdd4bb36-c756-483e-b163-c1420037a723\",\"coordinates\":\"402:1219\"},{\"source\":\"dab810ff-39b0-4724-af2d-c0c72324d84c\",\"target\":\"3e5bab81-8031-4bc2-85e5-6a0261d51873\",\"coordinates\":\"341:1610\"},{\"source\":\"a59c2218-cfd3-4121-b7bc-2a6ad3c3fab6\",\"target\":\"98f7b3fb-3cf3-44b2-b1a0-0e2cea22c5ba\",\"coordinates\":\"598:342\"},{\"source\":\"dfe84020-7ab8-4e2a-b606-c5d5f5187889\",\"target\":\"b2096149-4665-46ec-8146-1976fcb9fba9\",\"coordinates\":\"342:74\"}]",
+  "labels" : "[{\"identifier\":\"04e28c94-3fb4-4404-b360-32bf6ab55db1\",\"headerText\":\"\",\"text\":\"FirstWall\",\"location\":\"531:531\",\"size\":\"135:135\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"170:224:250\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"1\"},{\"identifier\":\"2ca79363-32b8-4d13-b257-433d5fb12853\",\"headerText\":\"\",\"text\":\"VolumeOverPower\",\"location\":\"1152:1152\",\"size\":\"135:135\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"170:224:250\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"2\"},{\"identifier\":\"693407d4-1411-4fa8-8232-293e56520033\",\"headerText\":\"\",\"text\":\"Coils\",\"location\":\"801:801\",\"size\":\"135:135\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"170:224:250\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"3\"},{\"identifier\":\"6f1896b7-8639-4365-b276-1d551509a8c6\",\"headerText\":\"\",\"text\":\"CPcoil\",\"location\":\"1422:1422\",\"size\":\"216:216\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"241:196:209\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"4\"},{\"identifier\":\"a2a711fa-8b10-4641-b28f-2359660fdcc7\",\"headerText\":\"\",\"text\":\"CPW\",\"location\":\"1638:1638\",\"size\":\"216:216\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"241:196:209\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"5\"},{\"identifier\":\"d1f4fc91-7c84-4ee1-8b32-a18b556fe0bf\",\"headerText\":\"\",\"text\":\"Gamma_n0\",\"location\":\"936:936\",\"size\":\"216:216\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"241:196:209\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"6\"},{\"identifier\":\"d7d3dbbe-552f-4bb8-9df7-1f2d80509a77\",\"headerText\":\"\",\"text\":\"Loop Optimizer\",\"location\":\"233:233\",\"size\":\"1623:1623\",\"alpha\":\"180\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"192:192:192\",\"labelPosition\":\"TOPRIGHT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"0\"},{\"identifier\":\"de8cfb1c-9b7c-47ad-82a8-ca68e2d1c5e3\",\"headerText\":\"\",\"text\":\"Coordinator\",\"location\":\"27:27\",\"size\":\"208:208\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"255:255:255\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"7\"},{\"identifier\":\"ee8e0cb5-9795-4165-bd7c-558756c997e9\",\"headerText\":\"\",\"text\":\"Plasma\",\"location\":\"666:666\",\"size\":\"135:135\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"170:224:250\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"8\"},{\"identifier\":\"f1d57b4e-6fe3-4197-b389-1f7110ed914d\",\"headerText\":\"\",\"text\":\"Optimizer\",\"location\":\"235:235\",\"size\":\"296:296\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"191:192:225\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"9\"},{\"identifier\":\"f705c0d3-4adb-49b8-9bb5-d5b952596fc5\",\"headerText\":\"\",\"text\":\"Blanket\",\"location\":\"1287:1287\",\"size\":\"135:135\",\"alpha\":\"140\",\"colorHeader\":\"0:0:0\",\"colorText\":\"0:0:0\",\"colorBackground\":\"170:224:250\",\"labelPosition\":\"TOPLEFT\",\"textAlignmentType\":\"LEFT\",\"headerAlignmentType\":\"CENTER\",\"border\":\"false\",\"headerSize\":\"12\",\"textSize\":\"9\",\"zIndex\":\"10\"}]"
+}
