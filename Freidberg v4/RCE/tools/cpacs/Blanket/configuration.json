@@ -1,0 +1,100 @@
+{
+  "alwaysRun" : true,
+  "commandScriptLinux" : "python \"${dir:tool}\"/Blanket.py -i \"${in:CPACS in}\" -o \"${dir:working}/RCE/output.xml\" -merge-files Y",
+  "commandScriptWindows" : "",
+  "copyToolBehavior" : "once",
+  "cpacsInitialEndpointName" : "CPACS in",
+  "cpacsOutgoingEndpointName" : "CPACS out",
+  "cpacsResultFilename" : "output.xml",
+  "deleteWorkingDirectoriesAfterWorkflowExecution" : true,
+  "deleteWorkingDirectoriesKeepOnErrorOnce" : true,
+  "documentationFilePath" : "",
+  "dynamicInputs" : [ {
+    "endpointIdentifier" : "default",
+    "endpointDataTypes" : [ "Boolean", "ShortText", "Integer", "Float" ],
+    "endpointDefaultDataType" : "Float",
+    "inputinputHandlingOptions" : [ "Single", "Constant", "Queue" ],
+    "defaultInputHandling" : "Single",
+    "inputinputExecutionConstraintOptions" : [ "Required", "RequiredIfConnected" ],
+    "defaultInputExecutionConstraint" : "Required",
+    "endpointMetaData" : {
+      "variable.xpath" : {
+        "guiName" : "XPath",
+        "guiPosition" : "0",
+        "guiGroup" : "XML values",
+        "visibility" : "shown",
+        "defaultValue" : "",
+        "validation" : "required",
+        "persistent" : "true"
+      }
+    }
+  } ],
+  "dynamicOutputs" : [ {
+    "endpointIdentifier" : "default",
+    "endpointDataTypes" : [ "Boolean", "ShortText", "Integer", "Float" ],
+    "endpointDefaultDataType" : "Float",
+    "endpointMetaData" : {
+      "variable.xpath" : {
+        "guiName" : "XPath",
+        "guiPosition" : "0",
+        "guiGroup" : "XML values",
+        "visibility" : "shown",
+        "defaultValue" : "",
+        "validation" : "required",
+        "persistent" : "true"
+      }
+    }
+  } ],
+  "enableCommandScriptLinux" : true,
+  "groupName" : "Freidberg",
+  "hasToolSpecificInput" : false,
+  "imitationScript" : "",
+  "imitationToolOutputFilename" : "ImitationMode/dummyOutput.xml",
+  "inputs" : [ {
+    "endpointFileName" : "CPACS_initial.xml",
+    "inputHandling" : "Queue",
+    "endpointUsage" : "required",
+    "endpointDataType" : "FileReference",
+    "defaultInputExecutionConstraint" : "Required",
+    "endpointName" : "CPACS in",
+    "defaultInputHandling" : "Queue",
+    "endpointFolder" : "Input folder",
+    "inputExecutionConstraint" : "Required"
+  } ],
+  "integrationType" : "CPACS",
+  "isActive" : true,
+  "launchSettings" : [ {
+    "limitInstallationInstancesNumber" : "10",
+    "limitInstallationInstances" : "true",
+    "rootWorkingDirectory" : "",
+    "host" : "RCE",
+    "toolDirectory" : "/home/wrutten/Git_repos/AGILE/agile-mdao-freidberg-model/Freidberg v4/RCE",
+    "version" : "1.0"
+  } ],
+  "mappingInputFilename" : "mappingInput.xml",
+  "mappingOutputFilename" : "mappingOutput.xml",
+  "outputs" : [ {
+    "endpointFolder" : "",
+    "endpointFileName" : "",
+    "endpointDataType" : "FileReference",
+    "endpointName" : "CPACS out",
+    "endpointUsage" : "-"
+  } ],
+  "postScript" : "",
+  "preScript" : "",
+  "setToolDirAsWorkingDir" : true,
+  "toolDescription" : "",
+  "toolIconPath" : "",
+  "toolInputFileName" : "input.xml",
+  "toolIntegrationVersion" : 1,
+  "toolIntegratorE-Mail" : "",
+  "toolIntegratorName" : "",
+  "toolName" : "Blanket",
+  "toolOutputFilename" : "output.xml",
+  "toolProperties" : {
+    "Default" : { }
+  },
+  "toolspecificInputdataFilename" : "",
+  "toolspecificMappingFilename" : "",
+  "uploadIcon" : true
+}
