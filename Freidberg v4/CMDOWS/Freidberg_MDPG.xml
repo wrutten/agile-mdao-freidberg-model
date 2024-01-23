@@ -18,7 +18,7 @@
   </header>
   <executableBlocks>
     <designCompetences>
-      <designCompetence uID="VolumeOverPower">
+      <designCompetence uID="Objective">
         <label>Dummy</label>
         <instanceID>1</instanceID>
         <inputs>
@@ -46,7 +46,7 @@
             <parameterUID>/dataSchema/architectureNodes/finalOutputVariables/dataSchemaCopy/reactor/other/VIPE</parameterUID>
           </output>
         </outputs>
-        <ID>VolumeOverPower</ID>
+        <ID>Objective</ID>
         <modeID>main</modeID>
         <version>1.0</version>
       </designCompetence>
@@ -272,7 +272,7 @@
         <executableBlockUID position="2">FirstWall</executableBlockUID>
         <executableBlockUID position="3">Coils</executableBlockUID>
         <executableBlockUID position="4">Blanket</executableBlockUID>
-        <executableBlockUID position="5">VolumeOverPower</executableBlockUID>
+        <executableBlockUID position="5">Objective</executableBlockUID>
       </executableBlocksOrder>
       <allowUnconvergedCouplings>true</allowUnconvergedCouplings>
     </problemFormulation>
@@ -352,7 +352,7 @@
           <uncoupledDesVarDepBlock>FirstWall</uncoupledDesVarDepBlock>
           <uncoupledDesVarDepBlock>Coils</uncoupledDesVarDepBlock>
           <uncoupledDesVarDepBlock>Blanket</uncoupledDesVarDepBlock>
-          <uncoupledDesVarDepBlock>VolumeOverPower</uncoupledDesVarDepBlock>
+          <uncoupledDesVarDepBlock>Objective</uncoupledDesVarDepBlock>
         </uncoupledDesVarDepBlocks>
       </executableBlocks>
     </problemRoles>
@@ -380,7 +380,7 @@
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/geometry/b</fromParameterUID>
-          <toExecutableBlockUID>VolumeOverPower</toExecutableBlockUID>
+          <toExecutableBlockUID>Objective</toExecutableBlockUID>
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/plasma/En</fromParameterUID>
@@ -428,7 +428,7 @@
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/geometry/R0</fromParameterUID>
-          <toExecutableBlockUID>VolumeOverPower</toExecutableBlockUID>
+          <toExecutableBlockUID>Objective</toExecutableBlockUID>
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/geometry/R0</fromParameterUID>
@@ -444,7 +444,7 @@
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/geometry/a</fromParameterUID>
-          <toExecutableBlockUID>VolumeOverPower</toExecutableBlockUID>
+          <toExecutableBlockUID>Objective</toExecutableBlockUID>
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/geometry/a</fromParameterUID>
@@ -456,7 +456,7 @@
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/geometry/c</fromParameterUID>
-          <toExecutableBlockUID>VolumeOverPower</toExecutableBlockUID>
+          <toExecutableBlockUID>Objective</toExecutableBlockUID>
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/coils/Bc</fromParameterUID>
@@ -495,16 +495,16 @@
           <toExecutableBlockUID>Optimizer</toExecutableBlockUID>
         </edge>
         <edge>
-          <fromExecutableBlockUID>VolumeOverPower</fromExecutableBlockUID>
+          <fromExecutableBlockUID>Objective</fromExecutableBlockUID>
           <toParameterUID>/dataSchema/reactor/other/VIPE</toParameterUID>
         </edge>
         <edge>
-          <fromExecutableBlockUID>VolumeOverPower</fromExecutableBlockUID>
+          <fromExecutableBlockUID>Objective</fromExecutableBlockUID>
           <toParameterUID>/dataSchema/architectureNodes/finalOutputVariables/dataSchemaCopy/reactor/other/VIPE</toParameterUID>
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/other/PE</fromParameterUID>
-          <toExecutableBlockUID>VolumeOverPower</toExecutableBlockUID>
+          <toExecutableBlockUID>Objective</toExecutableBlockUID>
         </edge>
         <edge>
           <fromParameterUID>/dataSchema/reactor/other/VIPE</fromParameterUID>
@@ -683,13 +683,13 @@
           <processStepNumber>4</processStepNumber>
         </edge>
         <edge>
-          <fromExecutableBlockUID>VolumeOverPower</fromExecutableBlockUID>
+          <fromExecutableBlockUID>Objective</fromExecutableBlockUID>
           <toExecutableBlockUID>Optimizer</toExecutableBlockUID>
           <processStepNumber>4</processStepNumber>
         </edge>
         <edge>
           <fromExecutableBlockUID>Plasma</fromExecutableBlockUID>
-          <toExecutableBlockUID>VolumeOverPower</toExecutableBlockUID>
+          <toExecutableBlockUID>Objective</toExecutableBlockUID>
           <processStepNumber>3</processStepNumber>
         </edge>
         <edge>
@@ -740,7 +740,7 @@
           <diagonalPosition>3</diagonalPosition>
         </node>
         <node>
-          <referenceUID>VolumeOverPower</referenceUID>
+          <referenceUID>Objective</referenceUID>
           <processStepNumber>3</processStepNumber>
           <diagonalPosition>6</diagonalPosition>
         </node>
@@ -773,7 +773,7 @@
                     <functionElement>Coils</functionElement>
                     <functionElement>FirstWall</functionElement>
                     <functionElement>Plasma</functionElement>
-                    <functionElement>VolumeOverPower</functionElement>
+                    <functionElement>Objective</functionElement>
                   </functionElements>
                 </loopElement>
               </loopElements>
@@ -913,7 +913,7 @@
           <relatedExecutableBlockUID>FirstWall</relatedExecutableBlockUID>
         </uncoupledDesVarDepAnalysis>
         <uncoupledDesVarDepAnalysis>
-          <relatedExecutableBlockUID>VolumeOverPower</relatedExecutableBlockUID>
+          <relatedExecutableBlockUID>Objective</relatedExecutableBlockUID>
         </uncoupledDesVarDepAnalysis>
         <uncoupledDesVarDepAnalysis>
           <relatedExecutableBlockUID>Plasma</relatedExecutableBlockUID>
