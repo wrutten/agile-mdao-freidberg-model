@@ -13,15 +13,15 @@ from __future__ import absolute_import, division, print_function
 
 import sys
 
-from VolumeOverPowerModel import VolumeOverPowerModel
+from ObjectiveFunction import ObjectiveFunction
 from ssbjkadmos.utils.execution import run_tool
 
 
-class VolumeOverPowerAnalysis(VolumeOverPowerModel):  # AbstractDiscipline
+class ObjectiveAnalysis(ObjectiveFunction):  # AbstractDiscipline
     pass
 
 
 if __name__ == "__main__":
 
-    analysis = VolumeOverPowerAnalysis()
+    analysis = ObjectiveAnalysis()
     run_tool(analysis, sys.argv)

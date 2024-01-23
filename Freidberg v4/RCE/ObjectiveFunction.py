@@ -24,7 +24,7 @@ from ssbjkadmos.tools.SsbjDiscipline import SsbjDiscipline
 from ssbjkadmos.utils.execution import run_tool
 
 
-class VolumeOverPowerModel(SsbjDiscipline):  # AbstractDiscipline
+class ObjectiveFunction(SsbjDiscipline):  # AbstractDiscipline
 
     @property
     def description(self):
@@ -63,14 +63,14 @@ class VolumeOverPowerModel(SsbjDiscipline):  # AbstractDiscipline
         R0 = float(doc.xpath(x_R0)[0].text)
         PE = float(doc.xpath(x_PE)[0].text)
 
-        VIPE = volumeoverpowermodel(a, b, c, R0, PE)
+        VIPE = objectivefunction(a, b, c, R0, PE)
 
         root = etree.Element(root_tag)
         doc = etree.ElementTree(root)
         xml_safe_create_element(doc, x_VIPE, VIPE)
         doc.write(out_file, encoding='utf-8', pretty_print=True, xml_declaration=True)
 
-def volumeoverpowermodel(a, b, c, R0, PE):
+def objectivefunction(a, b, c, R0, PE):
     # Volume over electric power objective function adapted from as derived in Freidberg (2007), eq. 5.17. P_W has been substituted for PE.
 
 
@@ -81,5 +81,5 @@ def volumeoverpowermodel(a, b, c, R0, PE):
 
 if __name__ == "__main__":
 
-    analysis = VolumeOverPowerModel()
+    analysis = ObjectiveFunction()
     run_tool(analysis, sys.argv)
