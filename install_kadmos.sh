@@ -1,2 +1,2 @@
 #!/bin/bash
-python ~/Git_repos/AGILE/kadmos/setup.py install
+pip install -e ~/Git_repos/AGILE/kadmos/
