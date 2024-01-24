@@ -5,3 +5,4 @@ AGILE-env
 #libraries
 kadmos.egg-info
 *.egg
+*.pyc
