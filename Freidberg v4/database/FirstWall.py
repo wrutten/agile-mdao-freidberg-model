@@ -13,15 +13,11 @@ from __future__ import absolute_import, division, print_function
 
 import sys
 
-from FirstWallModel import FirstWallModel
-from ssbjkadmos.utils.execution import run_tool
+from database.FirstWallModel import FirstWallModel
 
-
-class FirstWallAnalysis(FirstWallModel):  # AbstractDiscipline
+class FirstWall(FirstWallModel):  # AbstractDiscipline
     pass
 
 
 if __name__ == "__main__":
-
-    analysis = FirstWallAnalysis()
-    run_tool(analysis, sys.argv)
+    FirstWall().run_tool(sys.argv)

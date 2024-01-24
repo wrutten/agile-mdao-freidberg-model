@@ -13,15 +13,11 @@ from __future__ import absolute_import, division, print_function
 
 import sys
 
-from PlasmaModel import PlasmaModel
-from ssbjkadmos.utils.execution import run_tool
+from database.PlasmaModel import PlasmaModel
 
-
-class PlasmaAnalysis(PlasmaModel):  # AbstractDiscipline
+class Plasma(PlasmaModel):  # AbstractDiscipline
     pass
 
 
 if __name__ == "__main__":
-
-    analysis = PlasmaAnalysis()
-    run_tool(analysis, sys.argv)
+    Plasma().run_tool(sys.argv)

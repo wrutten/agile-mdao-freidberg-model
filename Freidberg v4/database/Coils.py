@@ -13,15 +13,11 @@ from __future__ import absolute_import, division, print_function
 
 import sys
 
-from CoilsModel import CoilsModel
-from ssbjkadmos.utils.execution import run_tool
+from database.CoilsModel import CoilsModel
 
-
-class CoilsAnalysis(CoilsModel):  # AbstractDiscipline
+class Coils(CoilsModel):  # AbstractDiscipline
     pass
 
 
 if __name__ == "__main__":
-
-    analysis = CoilsAnalysis()
-    run_tool(analysis, sys.argv)
+    Coils().run_tool(sys.argv)

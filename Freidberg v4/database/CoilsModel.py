@@ -18,10 +18,9 @@ from lxml import etree
 
 from kadmos.utilities.xml_utils_openlego import xml_safe_create_element
 
-from config import root_tag, x_a, x_b, x_c, x_Bc, x_mu0, x_sigma
+from database.config import root_tag, x_a, x_b, x_c, x_Bc, x_mu0, x_sigma
 
 from ssbjkadmos.tools.SsbjDiscipline import SsbjDiscipline
-from ssbjkadmos.utils.execution import run_tool
 
 
 class CoilsModel(SsbjDiscipline):  # AbstractDiscipline
@@ -81,6 +80,4 @@ def coilsmodel(a, b, c, Bc, mu0):
 
 
 if __name__ == "__main__":
-
-    analysis = CoilsModel()
-    run_tool(analysis, sys.argv)
+    CoilsModel().run_tool(sys.argv)

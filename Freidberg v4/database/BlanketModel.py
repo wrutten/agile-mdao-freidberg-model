@@ -18,10 +18,9 @@ from lxml import etree
 
 from kadmos.utilities.xml_utils_openlego import xml_safe_create_element
 
-from config import root_tag, x_lambdasd, x_lambdabr, x_En, x_Et, x_gammafrac, x_b
+from database.config import root_tag, x_lambdasd, x_lambdabr, x_En, x_Et, x_gammafrac, x_b
 
 from ssbjkadmos.tools.SsbjDiscipline import SsbjDiscipline
-from ssbjkadmos.utils.execution import run_tool
 
 
 class BlanketModel(SsbjDiscipline):  # AbstractDiscipline
@@ -50,7 +49,7 @@ class BlanketModel(SsbjDiscipline):  # AbstractDiscipline
         root = etree.Element(root_tag)
         doc = etree.ElementTree(root)
 
-        xml_safe_create_element(doc, x_b, 1) #m
+        xml_safe_create_element(doc, x_gammafrac, 0.01) #-
 
         return etree.tostring(doc, encoding='utf-8', pretty_print=True, xml_declaration=True)
 
@@ -80,6 +79,4 @@ def blanketmodel(b, lambdasd, lambdabr, En, Et):
 
 
 if __name__ == "__main__":
-
-    analysis = BlanketModel()
-    run_tool(analysis, sys.argv)
+    BlanketModel().run_tool(sys.argv)

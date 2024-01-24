@@ -18,10 +18,9 @@ from lxml import etree
 
 from kadmos.utilities.xml_utils_openlego import xml_safe_create_element
 
-from config import root_tag, x_a, x_R0, x_Ealpha, x_En, x_ELi, x_etat, x_n, x_sigmav, x_PE
+from database.config import root_tag, x_a, x_R0, x_Ealpha, x_En, x_ELi, x_etat, x_n, x_sigmav, x_PE
 
 from ssbjkadmos.tools.SsbjDiscipline import SsbjDiscipline
-from ssbjkadmos.utils.execution import run_tool
 
 
 class PlasmaModel(SsbjDiscipline):  # AbstractDiscipline
@@ -86,6 +85,4 @@ def plasmamodel(a, R0, Ealpha, En, ELi, etat, n, sigmav):
 
 
 if __name__ == "__main__":
-
-    analysis = PlasmaModel()
-    run_tool(analysis, sys.argv)
+    PlasmaModel().run_tool(sys.argv)

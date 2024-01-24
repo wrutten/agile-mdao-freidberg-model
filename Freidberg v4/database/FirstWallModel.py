@@ -18,10 +18,9 @@ from lxml import etree
 
 from kadmos.utilities.xml_utils_openlego import xml_safe_create_element
 
-from config import root_tag, x_R0, x_a, x_En, x_n, x_sigmav, x_PW
+from database.config import root_tag, x_R0, x_a, x_En, x_n, x_sigmav, x_PW
 
 from ssbjkadmos.tools.SsbjDiscipline import SsbjDiscipline
-from ssbjkadmos.utils.execution import run_tool
 
 
 class FirstWallModel(SsbjDiscipline):  # AbstractDiscipline
@@ -81,6 +80,4 @@ def firstwallmodel(a, En, n, sigmav, R0):
 
 
 if __name__ == "__main__":
-
-    analysis = FirstWallModel()
-    run_tool(analysis, sys.argv)
+    FirstWallModel().run_tool(sys.argv)

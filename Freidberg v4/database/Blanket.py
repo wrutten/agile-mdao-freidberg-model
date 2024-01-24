@@ -13,15 +13,11 @@ from __future__ import absolute_import, division, print_function
 
 import sys
 
-from BlanketModel import BlanketModel
-from ssbjkadmos.utils.execution import run_tool
+from database.BlanketModel import BlanketModel
 
-
-class BlanketAnalysis(BlanketModel):  # AbstractDiscipline
+class Blanket(BlanketModel):  # AbstractDiscipline
     pass
 
 
 if __name__ == "__main__":
-
-    analysis = BlanketAnalysis()
-    run_tool(analysis, sys.argv)
+    Blanket().run_tool(sys.argv)

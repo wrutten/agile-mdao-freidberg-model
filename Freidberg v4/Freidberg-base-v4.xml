@@ -15,7 +15,6 @@
             <ELi>2.5</ELi>
             <etat>0.4</etat>
             <PW>4</PW>
-            <CPW>4</CPW>
         </plasma>
         <blanket>
             <lambdabr>0.0031</lambdabr>
@@ -39,4 +38,6 @@
     </reference>
     <scaledData>
     </scaledData>
+    <scalers>
+    </scalers>
 </dataSchema>

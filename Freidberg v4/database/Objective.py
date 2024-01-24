@@ -13,15 +13,11 @@ from __future__ import absolute_import, division, print_function
 
 import sys
 
-from ObjectiveFunction import ObjectiveFunction
-from ssbjkadmos.utils.execution import run_tool
+from database.ObjectiveFunction import ObjectiveFunction
 
-
-class ObjectiveAnalysis(ObjectiveFunction):  # AbstractDiscipline
+class Objective(ObjectiveFunction):  # AbstractDiscipline
     pass
 
 
 if __name__ == "__main__":
-
-    analysis = ObjectiveAnalysis()
-    run_tool(analysis, sys.argv)
+    Objective().run_tool(sys.argv)

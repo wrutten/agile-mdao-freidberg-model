@@ -18,17 +18,16 @@ from lxml import etree
 
 from kadmos.utilities.xml_utils_openlego import xml_safe_create_element
 
-from config import root_tag, x_a, x_b, x_c, x_R0, x_PE, x_VIPE
+from database.config import root_tag, x_a, x_b, x_c, x_R0, x_PE, x_VIPE
 
 from ssbjkadmos.tools.SsbjDiscipline import SsbjDiscipline
-from ssbjkadmos.utils.execution import run_tool
 
 
 class ObjectiveFunction(SsbjDiscipline):  # AbstractDiscipline
 
     @property
     def description(self):
-        return u'VolumeOverPower model of the Freidberg test case.'
+        return u'Objective function of the Freidberg test case.'
 
     @property
     def supplies_partials(self):
@@ -80,6 +79,4 @@ def objectivefunction(a, b, c, R0, PE):
 
 
 if __name__ == "__main__":
-
-    analysis = ObjectiveFunction()
-    run_tool(analysis, sys.argv)
+    ObjectiveFunction().run_tool(sys.argv)
