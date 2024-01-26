@@ -1,8 +1,16 @@
 
-# Environments
-AGILE-env
+# Environments, all except openmdao
+AGILE-env/*
+!AGILE-env/lib
+!AGILE-env/lib/python3.10/site-packages
+AGILE-env/lib/python3.10/site-packages/*
+!AGILE-env/lib/python3.10/site-packages/openmdao/
+
 
 #libraries
 kadmos.egg-info
 *.egg
 *.pyc
+
+#output files
+Freidberg v4/output_files

@@ -8,11 +8,12 @@ prob = LEGOProblem(cmdows_path='Freidberg v4/CMDOWS/Freidberg_MDPG.xml',
                    base_xml_file='Freidberg v4/output-opt.xml')
 
 
-# prob.store_model_view(open_in_browser=True)
+prob.store_model_view(open_in_browser=False)
 
 prob.initialize_from_xml('Freidberg v4/Freidberg-base-v4.xml')
 
-
+# print(prob.driver._problem)
+# prob.run_model        
 prob.run_driver()
 
 # prob.collect_results()
