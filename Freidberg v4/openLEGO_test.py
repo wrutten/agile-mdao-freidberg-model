@@ -12,8 +12,7 @@ prob.store_model_view(open_in_browser=False)
 
 prob.initialize_from_xml('Freidberg v4/Freidberg-base-v4.xml')
 
-# print(prob.driver._problem)
-# prob.run_model        
+prob.run_model        
 prob.run_driver()
 
-# prob.collect_results()
+prob.collect_results()

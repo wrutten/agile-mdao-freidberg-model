@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        
+        {
+            "name": "Python Debugger: Python File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}"
+        }
+        {
+            "name": "Debug OpenMDAO",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "justMyCode": false,
+        }
+    ]
+}
