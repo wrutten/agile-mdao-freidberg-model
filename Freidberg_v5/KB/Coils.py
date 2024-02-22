@@ -82,11 +82,11 @@ class Coils(AbstractDiscipline):  # AbstractDiscipline
         Bc = float(doc.xpath(x_Bc)[0].text)
         mu0 = float(doc.xpath(x_mu0)[0].text)
 
-        A = Bc**2/4/mu0
+        A = Bc**2/4/mu0/10**6
 
         dsigmada = 2*A/c
         dsigmadb = 2*A/c
-        dsigmadc = -2*A*(a+b)/c^2
+        dsigmadc = -2*A*(a+b)/c**2
 
         partials = Partials()
         partials.declare_partials(x_sigma, [x_a, x_b, x_c],

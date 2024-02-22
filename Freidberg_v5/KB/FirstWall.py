@@ -79,7 +79,7 @@ class FirstWall(AbstractDiscipline):  # AbstractDiscipline
         n = float(doc.xpath(x_n)[0].text)
         sigmav = float(doc.xpath(x_sigmav)[0].text)
 
-        dPWda = En*n**2*sigmav/8
+        dPWda = En*n**2*sigmav/8/(6.241509*10**18)
 
         partials = Partials()
         partials.declare_partials(x_PW, [x_a],

@@ -81,8 +81,8 @@ class Blanket(AbstractDiscipline):
         En = float(doc.xpath(x_En)[0].text)
         Et = float(doc.xpath(x_Et)[0].text)
 
-        # A = -2*np.sqrt(Et/En)*lambdasd/lambdabr
-        # dgammafracdb = 0.5*A/lambdasd*np.exp(A*np.exp(0.5*b/lambdasd-1)+0.5*b/lambdasd-1)
+        A = -2*np.sqrt(Et/En)*lambdasd/lambdabr
+        dgammafracdb = 0.5*A/lambdasd*np.exp(A*np.exp(0.5*b/lambdasd-1)+0.5*b/lambdasd-1)
 
         partials = Partials()
         partials.declare_partials(x_gammafrac, [x_b],
