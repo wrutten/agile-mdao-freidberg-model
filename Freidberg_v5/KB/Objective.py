@@ -28,7 +28,7 @@ class Objective(AbstractDiscipline):  # AbstractDiscipline
 
     @property
     def supplies_partials(self):
-        return True
+        return False
 
     def generate_input_xml(self):
         root = etree.Element(root_tag)
@@ -65,8 +65,16 @@ class Objective(AbstractDiscipline):  # AbstractDiscipline
         PE = float(doc.xpath(x_PE)[0].text)
 
     # Volume over electric power objective function adapted from as derived in Freidberg (2007), eq. 5.17. P_W has been substituted for PE.
-        VIPE = 2*np.pi**2*R0*((a+b+c)**2-a**2)/PE #m3/MW
+        w1 = 0.0001
+        w2 = 0.9999
+        # VIPE = 2*np.pi**2*R0*((a+b+c)**2-a**2)/PE
+        O1 = 2*np.pi**2*R0*((a+b+c)**2-a**2)/PE
+        O2 = 1/(PE/1000)
 
+        print(O1,O2)
+
+        VIPE = np.sqrt(w1*O1**2 + w2*O2**2)
+# w1*(2*np.pi**2*R0*((a+b+c)**2-a**2)/PE)**2 
         root = etree.Element(root_tag)
         doc = etree.ElementTree(root)
         xml_safe_create_element(doc, x_VIPE, VIPE)

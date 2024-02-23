@@ -6,9 +6,9 @@ from openlego.core.problem import LEGOProblem
 
 file_dir = os.path.dirname(__file__)
 
-prob = LEGOProblem(cmdows_path='Freidberg_v5/CMDOWS/Freidberg Opt Benchmark CPE fix bR0.xml',
+prob = LEGOProblem(cmdows_path='Freidberg_v5/CMDOWS/Freidberg Opt Benchmark no CPE.xml',
                    kb_path = os.path.join(file_dir, 'KB'),
-                   data_folder = 'Freidberg_v5/output_files',
+                   data_folder = 'Freidberg_v5/output_files/varied_obj',
                    base_xml_file='Freidberg_v5/output-opt.xml')
 
 
