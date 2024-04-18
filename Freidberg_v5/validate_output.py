@@ -1,4 +1,5 @@
 import numpy as np
+# Incomplete file, unfinished attempt to validate the Freidberg results by directly solving the equations.
 
 
 # Constants
