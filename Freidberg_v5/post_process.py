@@ -1,4 +1,4 @@
-from openlego.utils import my_utils
+import my_utils
 import openmdao.api as om
 import os
 
