@@ -76,9 +76,7 @@ def plot_opt_hist(cr, base_filename, show = False):
 
     plt.tight_layout()
     plt.savefig(base_filename+'.png',bbox_inches='tight',dpi=100)
-
-    if show == True:
-        plt.show()
+    plt.show()
 
 ## Plot optimizer derivative values
 def plot_opt_deriv(cr, base_filename, show = False):
