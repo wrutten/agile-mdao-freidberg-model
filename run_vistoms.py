@@ -1,10 +1,11 @@
-import sys, os
-from kadmos.vistoms.vistoms import run_vistoms
-
 """"
 This script runs vistoms from the kadmos repository as installed in your environment.
 Code is directly copied from vistoms.py if __name__ == '__main__': 
 """
+
+import sys, os
+from six import string_types
+from kadmos.vistoms.vistoms import run_vistoms
 
 # Get system arguments
 args = sys.argv

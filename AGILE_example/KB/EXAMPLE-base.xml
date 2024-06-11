@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataSchema>
+    <geometry>
+        <par1>1</par1>
+        <par2>3</par2>
+    </geometry>
+    <objectives>
+        <O1>1</O1>
+    </objectives>
+    <scaledData>
+    </scaledData>
+    <scalers>
+    </scalers>
+</dataSchema>
