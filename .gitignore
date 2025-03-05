@@ -11,6 +11,3 @@ AGILE-env/lib/python3.10/site-packages/*
 kadmos.egg-info
 *.egg
 *.pyc
-
-#output files
-Freidberg_example/output_files

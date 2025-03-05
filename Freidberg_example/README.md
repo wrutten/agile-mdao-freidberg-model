@@ -18,6 +18,9 @@ In this example you find the following:
 - output-opt.xml 
     This file contains the resulting optimum point in the defined dataSchema. In principle this data is also present in the caseReader files. The structure of this file should always match the base dataScheme (in this case Freidberg-base-v5.xml), to my understanding.
 
+- reports folder
+    Contains miscelaneous output from openMDAO. Not sure what is here, hasn't been relevant for me so far.
+
 And last but not least:
 - main.py
     This is the driving python file. By instantiating a so-called openLEGO problem the entire optimisation problem is created, using a selected CMDOWS file as structure, with a KB folder containing the models to be included. Furthermore, the output folder and base XML file need to be defined (the latter ends up containing the optimal data point)

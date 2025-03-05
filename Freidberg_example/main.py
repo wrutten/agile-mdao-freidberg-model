@@ -6,7 +6,7 @@ from openlego.core.problem import LEGOProblem
 file_dir = os.path.dirname(__file__)
 
 ## Construct Optimization problem from CMDOWS file and models in knowledge base.
-prob = LEGOProblem(cmdows_path=os.path.join(file_dir, 'CMDOWS/Freidberg Opt Benchmark CPE_math.xml'),
+prob = LEGOProblem(cmdows_path=os.path.join(file_dir, 'CMDOWS/Freidberg Opt Benchmark CPE.xml'),
                    kb_path = os.path.join(file_dir, 'KB'),
                    data_folder = os.path.join(file_dir, 'output_files'),
                    base_xml_file=os.path.join(file_dir, 'output-opt.xml'))
