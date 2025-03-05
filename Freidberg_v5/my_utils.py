@@ -29,10 +29,10 @@ def plot_opt_hist(cr, base_filename, show = False):
         dv_R0_values.append(case['/dataSchema/reactor/geometry/R0'])
 
         # Normalise constraint values
-        PW_norm = case['/dataSchema/reactor/plasma/PW']/4-1
-        sigma_norm = case['/dataSchema/reactor/coils/sigma']/300-1
-        gammafrac_norm = case['/dataSchema/reactor/blanket/gammafrac']/0.01-1
-        CPE_norm = case['/dataSchema/reactor/other/CPE'][0]/1000-1
+        PW_norm = np.abs(case['/dataSchema/reactor/plasma/PW'][0]/4-1)
+        sigma_norm = np.abs(case['/dataSchema/reactor/coils/sigma'][0]/300-1)
+        gammafrac_norm = np.abs(case['/dataSchema/reactor/blanket/gammafrac'][0]/0.01-1)
+        CPE_norm = np.abs(case['/dataSchema/reactor/other/CPE'][0]/1000-1)
 
         con_PW_values.append(PW_norm)
         con_sigma_values.append(sigma_norm)
@@ -42,41 +42,41 @@ def plot_opt_hist(cr, base_filename, show = False):
         res = np.sqrt(PW_norm**2+sigma_norm**2+gammafrac_norm**2+CPE_norm**2)
         QOI_residuals.append(res)
 
-
-    fig, (axs) = plt.subplots(2, 2)
+    figsize_square = (8,5)
+    fig, (axs) = plt.subplots(2, 2, figsize=figsize_square, tight_layout=True, sharex=True)
     fig.subplots_adjust(left=None, bottom=None, right=None, top=None, wspace=0.5, hspace=None)
+    
+    for ax in axs.reshape(4):
+        ax.grid(color='0.1', linestyle='-.', linewidth=.5)
+        ax.tick_params(which='both', direction="in")
+
+    axs[0,0].plot(np.arange(len(obj_VIPE_values)), np.abs(np.array(obj_VIPE_values)))
+    axs[0,0].set(ylabel=r'$V_I/P_E$')#, title='Objective')
+    # axs[0,0].grid()
+    # axs[0,0].tick_params(which='both', direction="in")
+
+    axs[0,1].plot(np.arange(len(dv_a_values)), np.array(dv_a_values), label=r'$a$')
+    axs[0,1].plot(np.arange(len(dv_b_values)), np.array(dv_b_values), label=r'$b$')
+    axs[0,1].plot(np.arange(len(dv_c_values)), np.array(dv_c_values), label=r'$c$')
+    axs[0,1].plot(np.arange(len(dv_R0_values)), np.array(dv_R0_values), label=r'$R_0$')
+    axs[0,1].set(ylabel='[m]')#, title='Design Variables')
+    axs[0,1].legend(fontsize='small', loc='center left', bbox_to_anchor=(1, 0.5))
+
+    axs[1,0].plot(np.arange(len(QOI_residuals)), np.array(QOI_residuals))
+    axs[1,0].set(xlabel='Iteration', ylabel='2-norm of constraint residuals', yscale='log')#, title='Constraint violation', yscale='log')
 
 
-    axs[0,0].plot(np.arange(len(obj_VIPE_values)), np.array(obj_VIPE_values))
-    axs[0,0].set(xlabel='Iterations', ylabel='value', title='Objective')
-    # axs[0,0].set_yscale('log')
-    axs[0,0].grid()
+    axs[1,1].plot(np.arange(len(con_PW_values)), np.array(con_PW_values), label=r'$P_W$')
+    axs[1,1].plot(np.arange(len(con_gammafrac_values)), np.array(con_gammafrac_values), label=r'$\gamma_n/\gamma_{n0}$')
+    axs[1,1].plot(np.arange(len(con_sigma_values)), np.array(con_sigma_values), label=r'$\sigma$')
+    axs[1,1].plot(np.arange(len(con_CPE_values)), np.array(con_CPE_values), label=r'$P_E$')
+    axs[1,1].set(xlabel='Iteration', ylabel='Normalised constraint residual', yscale='log')#, title='Constraints', yscale='log')
+    axs[1,1].legend(fontsize='small', loc='center left', bbox_to_anchor=(1, 0.5))
 
-    axs[0,1].plot(np.arange(len(dv_a_values)), np.array(dv_a_values), label='a')
-    axs[0,1].plot(np.arange(len(dv_b_values)), np.array(dv_b_values), label='b')
-    axs[0,1].plot(np.arange(len(dv_c_values)), np.array(dv_c_values), label='c')
-    axs[0,1].plot(np.arange(len(dv_R0_values)), np.array(dv_R0_values), label='R0')
-    axs[0,1].set(xlabel='Iteration', ylabel='value', title='Design Variables')
-    axs[0,1].grid()
-    axs[0,1].legend(fontsize='small')
-
-    axs[1,0].plot(np.arange(len(QOI_residuals)), np.array(QOI_residuals), label='Total constraint residual')
-    axs[1,0].set_yscale('log')
-    axs[1,0].set(xlabel='Iteration', ylabel='value', title='Quantities of Interest')
-    axs[1,0].grid()
-    axs[1,0].legend(fontsize='small')
-
-    axs[1,1].plot(np.arange(len(con_PW_values)), np.array(con_PW_values), label='PW')
-    axs[1,1].plot(np.arange(len(con_gammafrac_values)), np.array(con_gammafrac_values), label='gammafrac')
-    axs[1,1].plot(np.arange(len(con_sigma_values)), np.array(con_sigma_values), label='sigma')
-    axs[1,1].plot(np.arange(len(con_CPE_values)), np.array(con_CPE_values), label='CPE')
-    axs[1,1].set(xlabel='Iteration', ylabel='Normalised value', title='Constraints')
-    axs[1,1].grid()
-    axs[1,1].legend(fontsize='small')
 
     plt.tight_layout()
     plt.savefig(base_filename+'.png',bbox_inches='tight',dpi=100)
-    plt.show()
+    # plt.show()
 
 ## Plot optimizer derivative values
 def plot_opt_deriv(cr, base_filename, show = False):
